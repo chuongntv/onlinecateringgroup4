@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2015 10:47:50 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.Cities" table="Cities" schema="dbo" catalog="OnlineCateringDB" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="countries" class="model.pojo.Countries" fetch="select">
+            <column name="CountryId" />
+        </many-to-one>
+        <property name="cityName" type="string">
+            <column name="CityName" />
+        </property>
+        <set name="catererses" table="Caterers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CityId" />
+            </key>
+            <one-to-many class="model.pojo.Caterers" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2015 10:47:50 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.CustomerChildInvoices" table="CustomerChildInvoices" schema="dbo" catalog="OnlineCateringDB" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="customerInvoices" class="model.pojo.CustomerInvoices" fetch="select">
+            <column name="InvoiceId" />
+        </many-to-one>
+        <property name="foodName" type="java.lang.Integer">
+            <column name="FoodName" />
+        </property>
+    </class>
+</hibernate-mapping>

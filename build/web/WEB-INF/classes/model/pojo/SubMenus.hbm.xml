@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2015 10:47:50 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.SubMenus" table="SubMenus" schema="dbo" catalog="OnlineCateringDB" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="menus" class="model.pojo.Menus" fetch="select">
+            <column name="MenuId" />
+        </many-to-one>
+        <property name="subMenuName" type="string">
+            <column name="SubMenuName" />
+        </property>
+        <property name="numberOfFood" type="java.lang.Integer">
+            <column name="NumberOfFood" />
+        </property>
+        <set name="foodses" table="Foods" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SubMenuId" />
+            </key>
+            <one-to-many class="model.pojo.Foods" />
+        </set>
+    </class>
+</hibernate-mapping>

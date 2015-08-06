@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="OnlineCateringDB" match-schema="dbo"/>
+  <table-filter match-name="Accounts"/>
+  <table-filter match-name="Caterers"/>
+  <table-filter match-name="MaterialCategories"/>
+  <table-filter match-name="Foods"/>
+  <table-filter match-name="WorkerTypes"/>
+  <table-filter match-name="SupplierChildInvoices"/>
+  <table-filter match-name="CategoryTypes"/>
+  <table-filter match-name="SubMenus"/>
+  <table-filter match-name="Menus"/>
+  <table-filter match-name="Materials"/>
+  <table-filter match-name="CustomerChildInvoices"/>
+  <table-filter match-name="WorkerSalaries"/>
+  <table-filter match-name="Suppliers"/>
+  <table-filter match-name="Workers"/>
+  <table-filter match-name="Countries"/>
+  <table-filter match-name="SupplierInvoices"/>
+  <table-filter match-name="Cities"/>
+  <table-filter match-name="CustomerInvoices"/>
+</hibernate-reverse-engineering>

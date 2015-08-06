@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2015 10:47:50 AM by Hibernate Tools 4.3.1 -->
+<!-- TriThoai Changed-->
+<hibernate-mapping>
+    <class name="model.pojo.MaterialCategories" table="MaterialCategories" schema="dbo" catalog="OnlineCateringDB" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="suppliers" class="model.pojo.Suppliers" fetch="select">
+            <column name="SupplierId" />
+        </many-to-one>
+        <property name="categoryName" type="string">
+            <column name="CategoryName" />
+        </property>
+        <set name="materialses" table="Materials" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CategoryId" />
+            </key>
+            <one-to-many class="model.pojo.Materials" />
+        </set>
+    </class>
+</hibernate-mapping>

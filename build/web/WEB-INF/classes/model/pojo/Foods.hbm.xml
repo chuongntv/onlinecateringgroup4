@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2015 10:47:50 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.Foods" table="Foods" schema="dbo" catalog="OnlineCateringDB" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="subMenus" class="model.pojo.SubMenus" fetch="select">
+            <column name="SubMenuId" />
+        </many-to-one>
+        <property name="foodName" type="string">
+            <column name="FoodName" />
+        </property>
+        <property name="isRequire" type="java.lang.Integer">
+            <column name="IsRequire" />
+        </property>
+        <property name="image" type="string">
+            <column name="Image" />
+        </property>
+    </class>
+</hibernate-mapping>

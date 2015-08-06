@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2015 10:47:50 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.Caterers" table="Caterers" schema="dbo" catalog="OnlineCateringDB" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="accounts" class="model.pojo.Accounts" fetch="select">
+            <column name="AccountId" />
+        </many-to-one>
+        <many-to-one name="cities" class="model.pojo.Cities" fetch="select">
+            <column name="CityId" />
+        </many-to-one>
+        <property name="catererName" type="string">
+            <column name="CatererName" />
+        </property>
+        <property name="catererPhoneNumber" type="string">
+            <column name="CatererPhoneNumber" />
+        </property>
+        <property name="catererEmail" type="string">
+            <column name="CatererEmail" />
+        </property>
+        <property name="catererAddress" type="string">
+            <column name="CatererAddress" />
+        </property>
+        <set name="supplierInvoiceses" table="SupplierInvoices" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CatererId" />
+            </key>
+            <one-to-many class="model.pojo.SupplierInvoices" />
+        </set>
+        <set name="workerTypeses" table="WorkerTypes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CatererId" />
+            </key>
+            <one-to-many class="model.pojo.WorkerTypes" />
+        </set>
+        <set name="customerInvoiceses" table="CustomerInvoices" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CatererId" />
+            </key>
+            <one-to-many class="model.pojo.CustomerInvoices" />
+        </set>
+        <set name="menuses" table="Menus" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CatererId" />
+            </key>
+            <one-to-many class="model.pojo.Menus" />
+        </set>
+    </class>
+</hibernate-mapping>

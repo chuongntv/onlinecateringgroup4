@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2015 10:47:50 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.Workers" table="Workers" schema="dbo" catalog="OnlineCateringDB" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="workerTypes" class="model.pojo.WorkerTypes" fetch="select">
+            <column name="WorkerTypeId" />
+        </many-to-one>
+        <property name="workerName" type="string">
+            <column name="WorkerName" />
+        </property>
+        <property name="workerPhoneNumber" type="string">
+            <column name="WorkerPhoneNumber" />
+        </property>
+        <property name="workerEmail" type="string">
+            <column name="WorkerEmail" />
+        </property>
+        <property name="workerAddress" type="string">
+            <column name="WorkerAddress" />
+        </property>
+        <property name="workerDateOfJoin" type="string">
+            <column name="WorkerDateOfJoin" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="Status" />
+        </property>
+        <set name="workerSalarieses" table="WorkerSalaries" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="WorkerId" />
+            </key>
+            <one-to-many class="model.pojo.WorkerSalaries" />
+        </set>
+        <set name="customerInvoiceses" table="CustomerInvoices" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="WorkerId" />
+            </key>
+            <one-to-many class="model.pojo.CustomerInvoices" />
+        </set>
+    </class>
+</hibernate-mapping>

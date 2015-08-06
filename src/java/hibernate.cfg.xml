@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="hibernate.connection.url">jdbc:sqlserver://104.155.219.40:1433;databaseName=OnlineCateringDB</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">abc123@@</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.format_sql">true</property>
+    <mapping resource="model/pojo/SubMenus.hbm.xml"/>
+    <mapping resource="model/pojo/CustomerInvoices.hbm.xml"/>
+    <mapping resource="model/pojo/Caterers.hbm.xml"/>
+    <mapping resource="model/pojo/Cities.hbm.xml"/>
+    <mapping resource="model/pojo/CustomerChildInvoices.hbm.xml"/>
+    <mapping resource="model/pojo/SupplierInvoices.hbm.xml"/>
+    <mapping resource="model/pojo/WorkerSalaries.hbm.xml"/>
+    <mapping resource="model/pojo/Workers.hbm.xml"/>
+    <mapping resource="model/pojo/Menus.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="model/pojo/MaterialCategories.hbm.xml"/>
+    <mapping resource="model/pojo/Accounts.hbm.xml"/>
+    <mapping resource="model/pojo/CategoryTypes.hbm.xml"/>
+    <mapping resource="model/pojo/SupplierChildInvoices.hbm.xml"/>
+    <mapping resource="model/pojo/Foods.hbm.xml"/>
+    <mapping resource="model/pojo/Materials.hbm.xml"/>
+    <mapping resource="model/pojo/Countries.hbm.xml"/>
+    <mapping resource="model/pojo/WorkerTypes.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="model/pojo/Suppliers.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
