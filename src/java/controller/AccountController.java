@@ -61,7 +61,7 @@ public class AccountController {
                 sessions.setAttribute("message", "Register success !");
                 sessions.setAttribute("user", account);
                 //sesssion by admin
-                sessions.setAttribute("userId", EncryptAndDecrypt.encrypt(account.getId()));
+                sessions.setAttribute("userId", account.getId());
                 if (account.getUserGroup().equals("customer")) {
                     return "redirect:../index.htm";
                 }

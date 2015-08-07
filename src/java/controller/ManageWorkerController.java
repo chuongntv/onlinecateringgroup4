@@ -356,8 +356,8 @@ public class ManageWorkerController {
     }
 
     @RequestMapping(value = "/deleteworker/{id}", method = RequestMethod.GET)
-    public String deleteWorker(@PathVariable(value = "id") String id, ModelMap modelMap, HttpSession sessions) throws Exception {
-        workerDAO.delete(workerDAO.findWorker(Integer.parseInt(EncryptAndDecrypt.decrypt(id))));
+    public String deleteWorker(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession sessions) throws Exception {
+        workerDAO.delete(workerDAO.findWorker(id));
 
         return "redirect:/manageworker/listworkers/" + typeIdPublic + ".htm";
     }

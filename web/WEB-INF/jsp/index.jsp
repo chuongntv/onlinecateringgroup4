@@ -25,7 +25,7 @@
                     }
                 });
             }
-           window.onpaint = setCatererId();
+           //window.onpaint = setCatererId();
         </script>
     </head>
 
@@ -42,7 +42,8 @@
 
         <h3>Admin</h3>
         <a href="${pageContext.request.contextPath}/suppliers/listSupplier.htm">List Supplier</a><br>
-        <a href="${pageContext.request.contextPath}/customers/listCustomers.htm">Management Customers</a>
+        <a href="${pageContext.request.contextPath}/customers/listCustomers.htm">Management Customers</a><br>
+        <a href="${pageContext.request.contextPath}/managercaterer/listCaterers.htm">Management Caterers</a>
         <h3>Caterer</h3>
         <a href="${pageContext.request.contextPath}/ordercaterer/listsuppliers.htm">Go to Order Page</a><br>
         <a href="${pageContext.request.contextPath}/manageworker/listTypes/${userId}.htm">Management Worker</a><br>

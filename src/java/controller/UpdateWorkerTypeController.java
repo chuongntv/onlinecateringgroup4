@@ -30,8 +30,8 @@ public class UpdateWorkerTypeController {
     WorkerTypesDAO typesDAO = new WorkerTypesDAO();
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable(value = "id") String id, ModelMap modelMap, HttpSession sessions) throws Exception {
-        modelMap.put("typeEdit", typesDAO.findType(Integer.parseInt(EncryptAndDecrypt.decrypt(id))));
+    public String edit(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession sessions) throws Exception {
+        modelMap.put("typeEdit", typesDAO.findType(id));
         return "caterer/managementworkertypes_update";
     }
 

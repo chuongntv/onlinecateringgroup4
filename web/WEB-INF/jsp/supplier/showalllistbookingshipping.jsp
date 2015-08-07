@@ -11,9 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <script type="text/javascript" language="javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>
+        <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>
+        <title>List Booking Shipping</title>
     </head>
     <body>
+
         <h1>List Booking Shipping</h1>
         <table border="1">
             <tr>
@@ -30,26 +33,29 @@
                     <td>${booking.deliveryDate}</td>
                     <td>${booking.status}</td>
                     <td><button onclick="showdetails(${booking.id});" >View Details</button></td>
-                    <td><button onclick="${pageContext.request.contextPath}/checkbooking/completed/${booking.id}.htm" >Cancel</button></td>
-                </tr> 
-            </c:forEach>
-        </table>
-                <div id="resultdetails"></div>
-                <script>
-            function showdetails(id) {
-                $.ajax({
-                    type: "post",
-                    url: "${pageContext.request.contextPath}/checkbooking/showdetails.htm",
-                    cache: true,
-                    data: 'idbooking=' + id,
-                    success: function (data) {
-                        $('#resultdetails').html(data);
-                    },
-                    error: function () {
-                        alert("Something went wrong...");
-                    }
-                });
-            }
-            </script>
-    </body>
+                <form><td><input type="submit" value="Completed" onclick="form.action = '${pageContext.request.contextPath}/checkbooking/completedshipping/${booking.id}.htm';"></td></form>
+            </tr> 
+        </c:forEach>
+    </table>
+
+    <div id="resultdetailsshipping"></div>
+
+    <script type="text/javascript">
+        function showdetails(id) {
+            $.ajax({
+                type: "post",
+                url: "${pageContext.request.contextPath}/checkbooking/showdetails.htm",
+                cache: true,
+                data: 'idbooking=' + id,
+                success: function (data) {
+                    $('#resultdetailsshipping').html(data);
+                },
+                error: function () {
+                    alert("Something went wrong...");
+                }
+            });
+        }
+    </script>
+
+</body>
 </html>

@@ -32,7 +32,7 @@
                     }
                 });
             }
-            setCatererId();
+            //window.onpaint = setCatererId();
         </script>
     </head>
     <body onload="setCatererId();">

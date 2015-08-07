@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>List Booking Completed</title>
     </head>
     <body>
         <h1>List Booking Completed</h1>
@@ -21,7 +21,6 @@
                 <td>Invoice Date</td>
                 <td>Delivery Date</td>
                 <td>Status</td>
-                <td colspan="4">Option</td>
             </tr>
             <c:forEach items="${listbookingscompleted}" var="booking">
                 <tr>

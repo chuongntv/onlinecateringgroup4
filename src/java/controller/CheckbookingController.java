@@ -14,8 +14,6 @@ import model.dao.SupplierChildInvoicesDAO;
 import model.dao.SupplierInvoicesDAO;
 import model.dao.SuppliersDAO;
 import model.pojo.Accounts;
-import model.pojo.MaterialCategories;
-import model.pojo.Materials;
 import model.pojo.SupplierChildInvoices;
 import model.pojo.SupplierInvoices;
 import org.springframework.stereotype.Controller;
@@ -44,31 +42,36 @@ public class CheckbookingController {
     String setUserId(HttpServletRequest request, HttpServletResponse response) {
         int accountId = Integer.parseInt(request.getParameter("catererId"));
         //catererIdPublic = catererId;      
-        if (supplierIdPublic == 0) {
-            Accounts accountLogin = accountDAO.findAccount(accountId);
-            if (accountLogin.getUserGroup().equals("supplier") || accountLogin.getUserGroup().equals("admin")) {
-                if (!accountLogin.getUserGroup().equals("admin")) {
-                    supplierIdPublic = supplierDAO.findSupplierByAccountId(accountId).getId();
-                }
-                if (accountLogin.getUserGroup().equals("admin")) {
-                    supplierIdPublic = accountLogin.getId();
-                }
-                return "success";
-            } else {
-                return "error";
+        //if (supplierIdPublic == 0) {
+        Accounts accountLogin = accountDAO.findAccount(accountId);
+        if (accountLogin.getUserGroup().equals("supplier") || accountLogin.getUserGroup().equals("admin")) {
+            if (!accountLogin.getUserGroup().equals("admin")) {
+                supplierIdPublic = supplierDAO.findSupplierByAccountId(accountId).getId();
             }
+            if (accountLogin.getUserGroup().equals("admin")) {
+                supplierIdPublic = accountLogin.getId();
+            }
+            return "success";
+        } else {
+            return "error";
         }
-        return "success";
+        //}
+        //return "success";
     }
 
     //listbooking
     @RequestMapping(value = "/listbooking", method = RequestMethod.GET)
     public String listBooking(HttpSession sessions, ModelMap modelMap) {
-        List<SupplierInvoices> listbooking = supplierInvoiceDAO.getAllSupplierInvoiceBySupplierId(supplierIdPublic, "waiting");
-        modelMap.put("listbookings", listbooking);
+        if (supplierIdPublic != 0) {
+            List<SupplierInvoices> listbooking = supplierInvoiceDAO.getAllSupplierInvoiceBySupplierId(supplierIdPublic, "waiting");
+            modelMap.put("listbookings", listbooking);
 //        List<MaterialCategories> listCategories = materialCategoriesDAO.getCatergories(supplierIdPublic);
 //        modelMap.put("categories", listCategories);
-        return "supplier/showalllistbooking";
+            return "supplier/showalllistbooking";
+        } else {
+            return "redirect:/account/login.htm";
+        }
+
     }
 
     @RequestMapping(value = "/showdetails.htm", method = RequestMethod.POST)
@@ -98,15 +101,12 @@ public class CheckbookingController {
         return result;
     }
 
-    @RequestMapping(value = "/shipping.htm", method = RequestMethod.POST)
-    public @ResponseBody
-    String shipBill(HttpServletRequest request, HttpServletResponse response) {
-        int bookingId = Integer.parseInt(request.getParameter("idbooking"));
-        boolean update = supplierInvoiceDAO.updateStatusForInvoice(bookingId, "shipping");
-        if (update) {
-            return "success";
-        }
-        return "false";
+    @RequestMapping(value = "/shipping/{bookingId}", method = RequestMethod.GET)
+    public String shipBill(@PathVariable(value = "bookingId") int bookingId, ModelMap modelMap, HttpSession sessions) {
+        supplierInvoiceDAO.updateStatusForInvoice(bookingId, "shipping");
+        List<SupplierInvoices> listbooking = supplierInvoiceDAO.getAllSupplierInvoiceBySupplierId(supplierIdPublic, "waiting");
+        sessions.setAttribute("listbookings", listbooking);
+        return "redirect:/checkbooking/listbooking.htm";
     }
 
     @RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
@@ -116,6 +116,7 @@ public class CheckbookingController {
         sessions.setAttribute("listbookings", listbooking);
         return "redirect:/checkbooking/listbooking.htm";
     }
+
     //showlistshipping
     @RequestMapping(value = "/showlistshipping", method = RequestMethod.GET)
     public String listBillShipping(HttpSession sessions, ModelMap modelMap) {
@@ -125,6 +126,7 @@ public class CheckbookingController {
 //        modelMap.put("categories", listCategories);
         return "supplier/showalllistbookingshipping";
     }
+
     @RequestMapping(value = "/completed/{id}", method = RequestMethod.GET)
     public String completedBill(@PathVariable(value = "id") int bookingId, ModelMap modelMap, HttpSession sessions) {
         supplierInvoiceDAO.updateStatusForInvoice(bookingId, "completed");
@@ -132,14 +134,28 @@ public class CheckbookingController {
         sessions.setAttribute("listbookings", listbooking);
         return "redirect:/checkbooking/showlistshipping.htm";
     }
+    //completedshipping
+    @RequestMapping(value = "/completedshipping/{id}", method = RequestMethod.GET)
+    public String completedBillShipping(@PathVariable(value = "id") int bookingId, ModelMap modelMap, HttpSession sessions) {
+        supplierInvoiceDAO.updateStatusForInvoice(bookingId, "completed");
+        List<SupplierInvoices> listbooking = supplierInvoiceDAO.getAllSupplierInvoiceBySupplierId(supplierIdPublic, "shipping");
+        sessions.setAttribute("listbookings", listbooking);
+        return "redirect:/checkbooking/showlistshipping.htm";
+    }
     //showlistcompleted
-    @RequestMapping(value = "/showlistshipping", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/showlistcompleted", method = RequestMethod.GET)
     public String listBillCompleted(HttpSession sessions, ModelMap modelMap) {
         List<SupplierInvoices> listbooking = supplierInvoiceDAO.getAllSupplierInvoiceBySupplierId(supplierIdPublic, "completed");
         modelMap.put("listbookingscompleted", listbooking);
-//        List<MaterialCategories> listCategories = materialCategoriesDAO.getCatergories(supplierIdPublic);
-//        modelMap.put("categories", listCategories);
         return "supplier/showalllistbookingcompleted";
     }
-    
+    //showlistcancel
+    @RequestMapping(value = "/showlistcancel", method = RequestMethod.GET)
+    public String listBillCancel(HttpSession sessions, ModelMap modelMap) {
+        List<SupplierInvoices> listbooking = supplierInvoiceDAO.getAllSupplierInvoiceBySupplierId(supplierIdPublic, "cancel");
+        modelMap.put("listbookingscancel", listbooking);
+        return "supplier/showalllistbookingcancel";
+    }
+
 }
