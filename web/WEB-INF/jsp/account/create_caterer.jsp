@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,72 +14,21 @@
         <title>Creating supplier</title>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <script type="text/javascript">
-//            $(function () {
-//                $("#country.id").autocomplete({
-//                    source: function (request, response) {
-//                        $.getJSON("../account/getCountries.htm", {
-//                            term: request.term
-//                        }, response);
-//                    }
-//                });
-//            });
-//            $(document).ready(function () {
-//                //attach autocomplete
-//                $("#countries.id").autocomplete({
-//                    minLength: 1,
-//                    delay: 500,
-//                    //define callback to format results
-//                    source: function (request, response) {
-//                        $.getJSON("${pageContext.request.contextPath}/account/getCountries", request, function (result) {
-//                            response($.map(result, function (item) {
-//                                return {
-//                                    // following property gets displayed in drop down
-//                                    label: item.countryName,
-//                                    // following property gets entered in the textbox
-//                                    value: item.id,
-//                                    // following property is added for our own use
-//                                    //tag_url: "http://" + window.location.host + "/tags/" + item.tagId + "/" + item.name
-//                                }
-//                            }));
-//                        });
-//                    }
-//                });
-//            });            
-//            $(document).ready(function () {
-//                $('#UserInfo_Email').autocomplete(
-//                        {
-//                            minLength: 0,
-//                            source: '@Url.Action("GetAllStudent", "UserInfoes")',
-//                            focus: function (event, ui) {
-//                                $("#UserInfo_Email").val(ui.item.Id);
-//                                return false;
-//                            },
-//                            select: function (event, ui) {
-//                                $("#StudentId").val(ui.item.Id);
-//                                $("#UserInfo_Email").val(ui.item.Email);
-//                                return false;
-//                            },
-//                            appendTo: $("#myModal")
-//                        })
-//                        .autocomplete("instance")._renderItem = function (ul, item) {
-//                    return $("<li>").append(item.id + "<br/><b>" + item.countryName + "</b>").appendTo(ul);
-//                };
-//
-//            })
-        </script>        
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>        
     </head>
     <body>
         <h1>Create caterer!</h1>
         <spring:form action="create_caterer.htm" commandName="caterer" method="POST" class="form-horizontal" role="form">       
             <h3>Account Id: ${user.id}</h3><input type="hidden" name="accounts.id" value="${user.id}"/>
-            City: <spring:input path="cities.id"/><br/>
-            <spring:errors path="cities.id"/>
-            Caterer Full Name:<spring:input path="catererName"/><br/>
-            Email: <spring:input path="catererEmail"/><br/>            
-            Address:<spring:input path="catererAddress"/><br/>            
-            Phone Number:<spring:input path="catererPhoneNumber"/><br/>            
+            City: <select name="cities.id">
+                <c:forEach var="city" items="${listcities}">
+                    <option value="${city.id}"> ${city.cityName}</option>
+                </c:forEach> 
+            </select><br/>
+            Caterer Full Name:<spring:input path="catererName" required="required"/><br/>
+            Email: <spring:input path="catererEmail" type="email" required="required"/><br/>            
+            Address:<spring:input path="catererAddress" required="required"/><br/>            
+            Phone Number:<spring:input path="catererPhoneNumber" type="number"/><br/>            
             <button type="submit">Create</button>
         </spring:form>
     </body>

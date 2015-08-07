@@ -16,8 +16,8 @@
         <h2>${message}</h2>
         <spring:form action="forgot.htm" commandName="account" method="POST" class="form-horizontal" role="form">    
             <h2>Type your username and your email in the form. We will send you your password</h2>
-            Username: <spring:input path="username"/><br/>
-            Email: <spring:input path="email"/><br/>            
+            Username: <spring:input path="username" required="required"/><br/>
+            Email: <spring:input path="email" type="email" required="required"/><br/>            
             <button type="submit">Submit</button>
         </spring:form>
     </body>

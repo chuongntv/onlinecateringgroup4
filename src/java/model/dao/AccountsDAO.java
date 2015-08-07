@@ -29,17 +29,16 @@ public class AccountsDAO {
                 sessionFactory.getCurrentSession().getTransaction().begin();
             }
             Query query = sessionFactory.getCurrentSession().createQuery("from Accounts c where c.id =:id");
-            query.setInteger("id", id);
+            query.setParameter("id", id);
             return (Accounts) query.uniqueResult();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         } finally {
             sessionFactory.getCurrentSession().close();
-        }
-    }
-    
-    public List<Accounts> findAllCustomers() {
+		}
+	}
+	public List<Accounts> findAllCustomers() {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
             // and m.status=0
@@ -157,9 +156,8 @@ public class AccountsDAO {
         } finally {
             sessionFactory.getCurrentSession().close();
         }
-    }
-
-    public Accounts findById(int id) {
+	}
+	public Accounts findById(int id) {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
             Query query = sessionFactory.getCurrentSession().createQuery("from Accounts a where a.id = :id");
@@ -172,7 +170,6 @@ public class AccountsDAO {
             sessionFactory.getCurrentSession().close();
         }
     }
-
     public Accounts update(Accounts acc) {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
@@ -218,6 +215,22 @@ public class AccountsDAO {
         }
     }
 
+    public Accounts changepass(String pass,int id) {
+        try {
+            sessionFactory.getCurrentSession().beginTransaction();
+            Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE Accounts SET password=:pass WHERE Id=:id");            
+            query.setParameter("pass", pass);
+            query.setParameter("id", id);                                 
+            query.executeUpdate();
+            sessionFactory.getCurrentSession().getTransaction().commit();
+            return this.findAccount(id);
+        } catch (Exception ex) {
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+            return null;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+		}
+	}
     public boolean checkInfo(Accounts acc1, Accounts acc2) {
         if (acc1.getEmail().equals(acc2.getEmail())
                 && acc1.getFullName().equals(acc2.getFullName())

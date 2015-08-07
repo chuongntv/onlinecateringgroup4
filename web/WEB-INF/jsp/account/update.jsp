@@ -10,19 +10,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Info</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>        
+        <script>
+            $(function () {
+                $("#dateOfBirth").datepicker();
+            });
+        </script>
     </head>
     <body>
         <h1>Update Account Information!</h1>
         <spring:form action="update.htm" commandName="account" method="POST" class="form-horizontal" role="form">
             <input type="hidden" name="id" value="${account.id}"/>
             <input type="hidden" name="username" value="${account.username}"/>
-            <h2>${account.username}</h2>
-            <h2>${account.userGroup}</h2>
-            Email: <spring:input path="email"/><br/>
-            Full Name:<spring:input path="fullName"/><br/>
+            <h2>Username: ${account.username}</h2>
+            <h2>User Group: ${account.userGroup}</h2>
+            Email: <spring:input type="email" path="email" required="required"/><br/>
+            Full Name:<spring:input path="fullName" required="required"/><br/>
             Address:<spring:input path="address"/><br/>
             Date Of Birth:<spring:input path="dateOfBirth"/><br/>
-            Phone Number:<spring:input path="phoneNumber"/><br/>            
+            Phone Number:<spring:input path="phoneNumber" type="number"/><br/>            
             <button type="submit"> Update</button>
         </spring:form>
     </body>

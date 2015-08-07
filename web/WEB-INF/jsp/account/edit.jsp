@@ -12,6 +12,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Account</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>        
+        <script>
+            $(function () {
+                $("#dateOfBirth").datepicker();
+            });
+        </script>
     </head>
     <body>
         <h1>Edit Account!</h1>
@@ -19,12 +27,13 @@
             <input type="hidden" name="id" value="${account.id}"/>
             <input type="hidden" name="username" value="${account.username}"/>
             <h2>${account.username}</h2>
-            Password: <spring:input path="password"/><br/>
+            Password: <spring:input path="password" required="required"/><br/>
             User Group: <spring:radiobutton path="userGroup" value="customer"/>Customer
-            <spring:radiobutton path="userGroup" value="caterer"/>Caterer
-            <spring:radiobutton path="userGroup" value="supplier"/>Supplier<br/>
-            Email: <spring:input path="email"/><br/>
-            Full Name:<spring:input path="fullName"/><br/>
+            <spring:radiobutton path="userGroup" value="caterer" />Caterer
+            <spring:radiobutton path="userGroup" value="supplier"/>Supplier
+            <spring:radiobutton path="userGroup" value="admin"/>Admin<br/>
+            Email: <spring:input type="email" path="email" required="required"/><br/>
+            Full Name:<spring:input path="fullName" required="required"/><br/>
             Address:<spring:input path="address"/><br/>
             Date Of Birth:<spring:input path="dateOfBirth"/><br/>
             Phone Number:<spring:input path="phoneNumber"/><br/>

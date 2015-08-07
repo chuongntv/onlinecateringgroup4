@@ -16,8 +16,8 @@
         <h1>Login</h1>
         <h2>${message}</h2>
         <spring:form action="login.htm" commandName="account" method="POST" class="form-horizontal" role="form">       
-            Username: <spring:input path="username" />
-            Password: <spring:password path="password" />
+            Username: <spring:input path="username" required="required"/>
+            Password: <spring:password path="password" required="required"/>
             <button type="submit">Login</button>
         </spring:form>
     </body>

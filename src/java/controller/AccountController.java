@@ -9,8 +9,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import model.dao.AccountsDAO;
+import model.dao.CityDAO;
+import model.dao.CountriesDAO;
 import model.pojo.Accounts;
 import model.pojo.Caterers;
+import model.pojo.Cities;
 import model.pojo.Countries;
 import model.pojo.Suppliers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +43,7 @@ public class AccountController {
     public String edit(ModelMap modelMap) {
         modelMap.put("account", new Accounts());
         return "account/register";
-        //return "register";
     }
-
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String create(@ModelAttribute(value = "account") Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
@@ -60,14 +61,20 @@ public class AccountController {
                 sessions.setAttribute("message", "Register success !");
                 sessions.setAttribute("user", account);
                 //sesssion by admin
-                sessions.setAttribute("userId",account.getId());
+                sessions.setAttribute("userId", EncryptAndDecrypt.encrypt(account.getId()));
                 if (account.getUserGroup().equals("customer")) {
                     return "redirect:../index.htm";
                 }
                 if (account.getUserGroup().equals("supplier")) {
+                    CountriesDAO countriesDAO = new CountriesDAO();
+                    List<Countries> listCountries = countriesDAO.getCountries();
+                    sessions.setAttribute("listcountries", listCountries);
                     return "redirect:create_supplier.htm";
                 }
                 if (account.getUserGroup().equals("caterer")) {
+                    CityDAO citiesDAO = new CityDAO();
+                    List<Cities> listcities = citiesDAO.getCities();
+                    sessions.setAttribute("listcities", listcities);
                     return "redirect:create_caterer.htm";
                 } else {
                     List<Accounts> list = accDAO.getAccounts();
@@ -78,22 +85,29 @@ public class AccountController {
         }
     }
 
+@RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap modelMap, HttpSession sessions) {
+        sessions.setAttribute("user", null);
+        sessions.setAttribute("userId", null);
+        sessions.setAttribute("message", null);
+        return "redirect:/index.htm";
+    }
+@RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String indexpage(HttpSession sessions) {
+        Accounts acc = (Accounts) sessions.getAttribute("user");
+        if (acc != null && acc.getUserGroup().equals("admin")) {
+            List<Accounts> list = accDAO.getAccounts();
+            sessions.setAttribute("accounts", list);
+            return "account/index";
+        } else {
+            return "redirect:/index.htm";
+        }
+    }
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap modelMap) {
         modelMap.put("account", new Accounts());
         return "account/login";
     }
-
-    
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String indexpage( HttpSession sessions){
-        List<Accounts> list = accDAO.getAccounts();
-        sessions.setAttribute("accounts", list);
-        return "account/index";
-
-    }
-    
-    
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@ModelAttribute(value = "account") Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
         if (bindingResult.hasErrors()) {
@@ -123,9 +137,13 @@ public class AccountController {
     private JavaMailSender mailSender;
 
     @RequestMapping(value = "/forgot", method = RequestMethod.GET)
-    public String forgot(ModelMap modelMap) {
-        modelMap.put("account", new Accounts());
-        return "account/forgot";
+    public String forgot(ModelMap modelMap, HttpSession sessions) {
+        if (sessions.getAttribute("user") == null) {
+            modelMap.put("account", new Accounts());
+            return "account/forgot";
+        } else {
+            return "redirect:/index.htm";
+        }
     }
 
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
@@ -156,8 +174,12 @@ public class AccountController {
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String update(ModelMap modelMap, HttpSession sessions) {
         Accounts accUpdate = (Accounts) sessions.getAttribute("user");
-        modelMap.put("account", accUpdate);
-        return "account/update";
+if (accUpdate != null) {
+            modelMap.put("account", accUpdate);
+            return "account/update";
+        } else {
+            return "redirect:/index.htm";
+        }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -175,13 +197,18 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(ModelMap modelMap, @PathVariable(value = "id") int id) {
-        modelMap.put("account", accDAO.findById(id));
-        return "account/edit";
+    public String edit(ModelMap modelMap, @PathVariable(value = "id") int id, HttpSession sessions) {
+        Accounts acc = (Accounts) sessions.getAttribute("user");
+        if (acc != null && acc.getUserGroup().equals("admin")) {
+            modelMap.put("account", accDAO.findAccount(id));
+            return "account/edit";
+        } else {
+            return "redirect:/index.htm";
+        }
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(@ModelAttribute(value = "account") @Valid Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
+    public String edit(@ModelAttribute(value = "account")@Valid Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Update failed !");
             return "countries_edit";
@@ -194,6 +221,30 @@ public class AccountController {
         }
     }
 
+	@RequestMapping(value = "/changepass", method = RequestMethod.GET)
+    public String changepass(ModelMap modelMap, HttpSession sessions) {
+        if (sessions.getAttribute("user") != null) {
+            Accounts acc = (Accounts) sessions.getAttribute("user");
+            modelMap.put("account", acc);
+            return "account/change_password";
+        } else {
+            return "redirect:/account/login.htm";
+        }
+    }
+
+    @RequestMapping(value = "/changepass", method = RequestMethod.POST)
+    public String changepass(@ModelAttribute(value = "account") Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
+        if (bindingResult.hasErrors()) {
+            modelMap.put("message", "Changing Password failed !");
+            return "account/change_password";
+        } else {
+            accDAO.changepass(account.getPassword(), account.getId());
+            sessions.setAttribute("message", "Change pass success!");
+            Accounts acc = accDAO.findAccount(account.getId());
+            sessions.setAttribute("user", acc);
+            return "redirect:/index.htm";
+        }
+    }
     @RequestMapping(value = "/getCountries", method = RequestMethod.GET)
     public @ResponseBody
     List<Countries> getCountries(@RequestParam("term") String name) {
@@ -218,6 +269,7 @@ public class AccountController {
         } else {
             accDAO.addSupplier(supplier);
             sessions.setAttribute("user", accDAO.findById(supplier.getAccounts().getId()));
+			sessions.setAttribute("listcountries", null);
             sessions.setAttribute("message", "Create supplier completed!");
             return "redirect:/index.htm";
         }
@@ -239,6 +291,7 @@ public class AccountController {
             return "redirect:account/create_caterer";
         } else {
             accDAO.addCaterer(caterer);
+			sessions.setAttribute("listcities", null);
             sessions.setAttribute("user", accDAO.findById(caterer.getAccounts().getId()));
             sessions.setAttribute("message", "Create caterer completed!");
             return "redirect:/index.htm";
