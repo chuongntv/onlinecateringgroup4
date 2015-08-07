@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import model.pojo.Cities;
 import model.util.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -45,7 +46,18 @@ public class CityDAO {
         } finally {
             sessionFactory.getCurrentSession().close();
         }
-        
+	}
+	public List<Cities> getCities() {
+        try {
+            sessionFactory.getCurrentSession().beginTransaction();
+            Query query = sessionFactory.getCurrentSession().createQuery("from Cities");            
+            return query.list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
     }
 
 }

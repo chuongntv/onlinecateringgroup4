@@ -17,9 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author admin
  */
 public class WorkerTypesDAO {
+
     @Autowired
     public final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    
+
     public List<WorkerTypes> getTypes(int catererId) {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
@@ -34,7 +35,7 @@ public class WorkerTypesDAO {
         }
 
     }
-    
+
     public WorkerTypes create(WorkerTypes type, int catererId) {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
@@ -54,24 +55,24 @@ public class WorkerTypesDAO {
             sessionFactory.getCurrentSession().close();
         }
     }
-    
+
     public WorkerTypes findType(int id) {
-        WorkerTypes test =  null;
+        WorkerTypes test = null;
         try {
             if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
                 sessionFactory.getCurrentSession().getTransaction().begin();
             }
             Query query = sessionFactory.getCurrentSession().createQuery("from WorkerTypes c where c.id =:id");
             query.setInteger("id", id);
-            
-            test = (WorkerTypes)query.uniqueResult();             
-            
+            test = (WorkerTypes) query.uniqueResult();
+
         } catch (Exception ex) {
-            ex.printStackTrace();             
-            
+            ex.printStackTrace();
+
         } finally {
-           if (sessionFactory.getCurrentSession().getTransaction().isActive()) 
+            if (sessionFactory.getCurrentSession().getTransaction().isActive()) {
                 sessionFactory.getCurrentSession().close();
+            }
         }
         return test;
     }
@@ -103,6 +104,22 @@ public class WorkerTypesDAO {
             sessionFactory.getCurrentSession().getTransaction().commit();
         } catch (Exception ex) {
             sessionFactory.getCurrentSession().getTransaction().rollback();
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+
+    //Nathan Tran begin
+
+    public List<WorkerTypes> getListWorkerType() {
+        try {
+            sessionFactory.getCurrentSession().beginTransaction();
+            //List<MaterialCategories> list = sessionFactory.getCurrentSession().createQuery("from MaterialCategories m where m.suppliers.id ="+(supplierId)).list();
+            List<WorkerTypes> list = sessionFactory.getCurrentSession().createQuery("from WorkerTypes").list();
+            return list;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
         } finally {
             sessionFactory.getCurrentSession().close();
         }
