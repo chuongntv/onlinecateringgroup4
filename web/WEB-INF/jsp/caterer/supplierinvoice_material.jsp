@@ -62,12 +62,14 @@
                 <td>Supplier Name</td>
                 <td>Invoice Date</td>
                 <td>Delivery Date</td>
+                <td>Status</td>
             </tr>
             <c:forEach items="${listinvoices}" var="invoice">
                 <tr>
                     <td>${invoice.suppliers.supplierName}</td>
                     <td>${invoice.invoiceDate}</td>
                     <td>${invoice.deliveryDate}</td>
+                    <td>${invoice.status}</td>
                 </tr> 
             </c:forEach>
         </table>

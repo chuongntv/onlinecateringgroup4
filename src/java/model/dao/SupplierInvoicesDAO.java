@@ -12,6 +12,7 @@ import model.pojo.SupplierInvoices;
 import model.pojo.Suppliers;
 import model.pojo.WorkerTypes;
 import model.util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,11 +75,14 @@ public class SupplierInvoicesDAO {
             sessionFactory.getCurrentSession().close();
         }
     }
-    
-    public List<SupplierInvoices> getAllSupplierInvoiceBySupplierId(int supplierId,String status) {
+
+    public List<SupplierInvoices> getAllSupplierInvoiceBySupplierId(int supplierId, String status) {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
-            List<SupplierInvoices> list = sessionFactory.getCurrentSession().createQuery("from SupplierInvoices m where m.suppliers.id =:idsupp and m.status=:status order by ").setParameter("idsupp", supplierId).setParameter("status", status).list();
+            List<SupplierInvoices> list = sessionFactory.getCurrentSession().createQuery("from SupplierInvoices s where s.suppliers.id =:supplierId and s.status=:status order by s.id desc").setParameter("supplierId", supplierId).setParameter("status", status).list();
+            for (SupplierInvoices item : list) {
+                Hibernate.initialize(item.getCaterers());
+            }
             return list;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -89,6 +93,25 @@ public class SupplierInvoicesDAO {
 
     }
     
+    public boolean updateStatusForInvoice(int supplierInvoiceId, String status) {
+        try {
+            sessionFactory.getCurrentSession().beginTransaction();
+            Query query = sessionFactory.getCurrentSession().createSQLQuery("UPDATE SupplierInvoices"
+                    + "   SET Status = :status"
+                    + " WHERE Id = :id");
+            query.setParameter("id", supplierInvoiceId);
+            query.setParameter("status", status);
+            query.executeUpdate();
+            sessionFactory.getCurrentSession().getTransaction().commit();
+            return true;
+        } catch (Exception ex) {
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+            return false;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+
     public SupplierInvoices updateDeliveryDateForInvoice(SupplierInvoices supplierInvoices, String deliveryDate) {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
@@ -125,6 +148,7 @@ public class SupplierInvoicesDAO {
         }
 
     }
+
     public SupplierInvoices checkInvoice(int supplierId, int catererId, String invoiceDate) {
         try {
             sessionFactory.getCurrentSession().beginTransaction();

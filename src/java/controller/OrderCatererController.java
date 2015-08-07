@@ -254,16 +254,15 @@ public class OrderCatererController {
         result += "<h1>My Bill</h1>";
         result += "<table border='1' >"
                 + "<tr>"
-                + "<th> ID </th>"
                 + "<th> Material Name </th>"
                 + "<th> Price/Unit</th>"
                 + "<th>Quantity</th>"
                 + "</tr>" + "";
         for (SupplierChildInvoices item : listInvoiceChildPublic) {
-            result += "<tr><td>" + item.getId() + "</td>"
+            result += "<tr>"
                     + "<td>" + item.getMaterialName() + "</td>"
                     + "<td>" + item.getMaterialPricePerUnit() + "</td>"
-                    + "<td>" + item.getQuantity() + "</td>";
+                    + "<td>" + item.getQuantity() + "</td></tr>";
         }
         result += "</table><br>";
         result += "<button onclick='chooseDeliveryDate();'>Completed</button>";
