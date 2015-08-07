@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,8 +30,14 @@
     </head>
 
     <body>
+    <c:set var="user" scope="session" value="${user}"/>
+    <c:if test="${user==null}">
         <a href="${pageContext.request.contextPath}/account/register.htm">Register</a><br><br>
         <a href="${pageContext.request.contextPath}/account/login.htm">Login</a><br><br>
+    </c:if>
+    <c:if test="${user!=null}">
+        <a href="${pageContext.request.contextPath}/account/logout.htm">Logout</a><br><br>
+    </c:if>
         <strong>User ID: ${userId}</strong>
         <h3>Supplier</h3>
         <a href="${pageContext.request.contextPath}/materialcategories/listCategories/${userId}.htm">List Material Categories</a><br>
@@ -47,10 +53,8 @@
         <h3>Caterer</h3>
         <a href="${pageContext.request.contextPath}/ordercaterer/listsuppliers.htm">Go to Order Page</a><br>
         <a href="${pageContext.request.contextPath}/manageworker/listTypes/${userId}.htm">Management Worker</a><br>
-        
         <p>Hello! This is the default welcome page for a Spring Web MVC project.</p>
         <a href="${pageContext.request.contextPath}/country/listCountries.htm">Show all countries</a><br>
-
     </body>
 </html>
 

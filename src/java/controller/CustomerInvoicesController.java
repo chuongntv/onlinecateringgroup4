@@ -55,7 +55,7 @@ public class CustomerInvoicesController {
                 sessions.setAttribute("listInvoices", list);
                 return "invoicecus/index";
             }
-            else return "redirect:index.htm";
+            else return "redirect:/index.htm";
         } else {
             return "redirect:/account/login.htm";
         }
@@ -121,7 +121,7 @@ public class CustomerInvoicesController {
             return "redirect:/index.htm";
         } else {
             cusDAO.edit(invoice);
-            return "redirect:customerInvoice/index.htm";
+            return "redirect:/customerInvoice/index.htm";
         }
     }
 
@@ -131,7 +131,7 @@ public class CustomerInvoicesController {
         if (user == null) {
             return "redirect:/account/login.htm";
         } else {
-            if (!(user.getUserGroup().equals("caterer"))) {
+            if (!(user.getUserGroup().equals("caterer")||user.getUserGroup().equals("customer"))) {
                 return "redirect:/login.htm";
             } else {
                 modelMap.put("invoice", cusDAO.findById(id));

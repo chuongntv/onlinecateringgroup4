@@ -27,9 +27,6 @@
                 </c:forEach> 
             </select>
             <div id="result"></div>
-            Status: <spring:radiobutton path="status" value="cancel"/>Cancel
-            <spring:radiobutton path="status" value="waiting" />Waiting 
-            <spring:radiobutton path="status" value="complete" />Complete
             <br/>
             <input type="submit" value="Save"/> 
             <p></p>
