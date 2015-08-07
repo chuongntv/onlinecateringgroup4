@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author admin
  */
 public class CaterersDAO {
+
     @Autowired
     public final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
     public Caterers findCaterer(int id) {
         try {
             if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
@@ -26,7 +28,7 @@ public class CaterersDAO {
             }
             Query query = sessionFactory.getCurrentSession().createQuery("from Caterers c where c.id =:id");
             query.setInteger("id", id);
-            return (Caterers)query.uniqueResult();
+            return (Caterers) query.uniqueResult();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -34,9 +36,10 @@ public class CaterersDAO {
             sessionFactory.getCurrentSession().close();
         }
     }
+
     public Caterers findCatererByAccount(int id) {
         try {
-                        if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
+            if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
                 sessionFactory.getCurrentSession().getTransaction().begin();
             }
             Query query = sessionFactory.getCurrentSession().createQuery("select caterer,account from Caterers caterer join caterer.accounts account where account.id =:id");

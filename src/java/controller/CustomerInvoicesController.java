@@ -49,11 +49,13 @@ public class CustomerInvoicesController {
                 List<CustomerInvoices> listInvoices = cusDAO.getListByCaterer(cat.getId());
                 sessions.setAttribute("listInvoices", listInvoices);
                 return "invoicecus/index";
-            } else {
+            }
+            if (user.getUserGroup().equals("customer")) {
                 List<CustomerInvoices> list = cusDAO.getList(user.getId());
                 sessions.setAttribute("listInvoices", list);
                 return "invoicecus/index";
             }
+            else return "redirect:index.htm";
         } else {
             return "redirect:/account/login.htm";
         }
@@ -69,38 +71,32 @@ public class CustomerInvoicesController {
 //            if (!(user.getUserGroup().equals("caterer")||user.getUserGroup().equals("customer"))) {
 //                return "redirect:/login.htm";
 //            } else {
-                CustomerChildInvoicesDAO cusChildDAO = new CustomerChildInvoicesDAO();
-                List<CustomerChildInvoices> listCusChildInvoices = cusChildDAO.findCusChildInvoiceByCusInvoices(id);
-                modelMap.put("listchild", listCusChildInvoices);
-                CustomerInvoices customerInvoice = cusDAO.findById(id);
-                modelMap.put("invoice", customerInvoice);
+            CustomerChildInvoicesDAO cusChildDAO = new CustomerChildInvoicesDAO();
+            List<CustomerChildInvoices> listCusChildInvoices = cusChildDAO.findCusChildInvoiceByCusInvoices(id);
+            modelMap.put("listchild", listCusChildInvoices);
+            CustomerInvoices customerInvoice = cusDAO.findById(id);
+            modelMap.put("invoice", customerInvoice);
 //            }
         }
         return "invoicecus/child_detail";
     }
 
-//    @RequestMapping(value = "/getWorker",method = RequestMethod.GET)
-//    public @ResponseBody String getWorker(){
-//        WorkersDAO workDAO = new WorkersDAO();
-//        List<Workers> list = workDAO.getWorkers(1);
-//        return "";
-//    }
-    
+
     @RequestMapping(value = "/chooseWorker.htm", method = RequestMethod.POST)
     public @ResponseBody
-    String showListMaterials(HttpServletRequest request, HttpServletResponse response){
+    String showListMaterials(HttpServletRequest request, HttpServletResponse response) {
         int workerTypeId = Integer.parseInt(request.getParameter("workerTypeId"));
         WorkersDAO workDAO = new WorkersDAO();
         List<Workers> list = workDAO.getWorkers(workerTypeId);
         String result = "";
-        result+="Worker Name: <select name='workers.id'>";
+        result += "Worker Name: <select name='workers.id'>";
         for (Workers item : list) {
-            result+="<option value='"+item.getId()+"'>"+item.getWorkerName()+"</option>";
-        }        
-        result+="</select>";
+            result += "<option value='" + item.getId() + "'>" + item.getWorkerName() + "</option>";
+        }
+        result += "</select>";
         return result;
     }
-    
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession session) {
         Accounts user = (Accounts) session.getAttribute("user");
@@ -115,7 +111,7 @@ public class CustomerInvoicesController {
                 modelMap.put("workerType", workerTypesDAO.getListWorkerType());
                 return "invoicecus/edit";
             }
-        }        
+        }
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -124,11 +120,11 @@ public class CustomerInvoicesController {
             sessions.setAttribute("message", "Edit failed !");
             return "redirect:/index.htm";
         } else {
-            cusDAO.edit(invoice);            
+            cusDAO.edit(invoice);
             return "redirect:customerInvoice/index.htm";
         }
     }
-    
+
     @RequestMapping(value = "/editStatus/{id}", method = RequestMethod.GET)
     public String editStatus(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession session) {
         Accounts user = (Accounts) session.getAttribute("user");
@@ -141,7 +137,7 @@ public class CustomerInvoicesController {
                 modelMap.put("invoice", cusDAO.findById(id));
                 return "invoicecus/editStatus";
             }
-        }        
+        }
     }
 
     @RequestMapping(value = "/editStatus", method = RequestMethod.POST)
@@ -150,7 +146,7 @@ public class CustomerInvoicesController {
             sessions.setAttribute("message", "Edit failed !");
             return "redirect:/index.htm";
         } else {
-            cusDAO.editStatus(invoice);            
+            cusDAO.editStatus(invoice);
             return "redirect:/customerInvoice/index.htm";
         }
     }
