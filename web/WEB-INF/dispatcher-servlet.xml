@@ -38,11 +38,17 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     
     The index controller.
     
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />-->
-          <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+<bean name="indexController"
+    class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+    p:viewName="index" />-->
+<!--    <bean id="viewResolver"
+                class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+                p:prefix="/WEB-INF/jsp/"
+                p:suffix=".jsp" />-->
+    
+    
+    <bean id="viewResolver"
+                class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass">
             <value>org.springframework.web.servlet.view.tiles3.TilesView</value>
         </property>
@@ -56,10 +62,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
             </list>
         </property>
     </bean> 
-
-    <!--
-    The index controller.
-    -->
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />

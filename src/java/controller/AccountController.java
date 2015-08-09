@@ -42,7 +42,9 @@ public class AccountController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String edit(ModelMap modelMap) {
         modelMap.put("account", new Accounts());
+        String regex = "membername_controllername_viewname";
         return "account/register";
+        
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

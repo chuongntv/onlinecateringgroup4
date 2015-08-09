@@ -17,4 +17,7 @@
         <put-attribute name="content" value="/WEB-INF/jsp/news.jsp" />
     </definition>
     
+    <definition name="gototestpage"  template="/WEB-INF/jsp/templates/mytemplate.jsp">
+        <put-attribute name="content" value="/WEB-INF/jsp/testfolder/test.jsp" />
+    </definition>
 </tiles-definitions>
