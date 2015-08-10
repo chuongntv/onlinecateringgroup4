@@ -51,5 +51,64 @@ public class SubMenusDAO {
         }
         
     }
+      public SubMenus create(SubMenus subMenu) {
+        try {
+            sessionFactory.getCurrentSession().beginTransaction();
+            sessionFactory.getCurrentSession().save(subMenu);
+            sessionFactory.getCurrentSession().getTransaction().commit();
+            return subMenu;
+        } catch (Exception ex) {
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+            return null;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+
+    public SubMenus findSubMenuById(int id) {
+        try {
+            if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                sessionFactory.getCurrentSession().getTransaction().begin();
+            }
+            Query query = sessionFactory.getCurrentSession().createQuery("select submenu,menu from SubMenus submenu join submenu.menus menu where submenu.id =:id ");
+            query.setParameter("id", id);
+            Object[] obj = (Object[]) query.uniqueResult();
+            SubMenus submenu = (SubMenus) obj[0];
+            return submenu;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+     public SubMenus edit(SubMenus subMenu){
+        try{
+            if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                sessionFactory.getCurrentSession().getTransaction().begin();
+            }
+             sessionFactory.getCurrentSession().merge(subMenu);
+            sessionFactory.getCurrentSession().getTransaction().commit();
+            
+            return subMenu;
+        }catch(Exception ex){
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+            return null;
+        }finally{
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+         public void delete(SubMenus subMenus) {
+        try {
+            sessionFactory.getCurrentSession().beginTransaction();
+            sessionFactory.getCurrentSession().delete(subMenus);
+            sessionFactory.getCurrentSession().getTransaction().commit();
+        } catch (Exception ex) {
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+    
 
 }

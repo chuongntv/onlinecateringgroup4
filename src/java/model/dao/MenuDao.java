@@ -72,5 +72,84 @@ public class MenuDao {
             sessionFactory.getCurrentSession().close();
         }
     }
+        
+         public List<Menus> listMenuByCaterer(int id) {
+        try {
+            if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                sessionFactory.getCurrentSession().getTransaction().begin();
+            }
+            Query query = sessionFactory.getCurrentSession().createQuery("select menu,caterer,category from Menus menu join menu.caterers caterer join menu.categoryTypes category where caterer.id =:id ");
+            query.setParameter("id", id);
+            List list = query.list();
+            Iterator ite = list.iterator();
+            List<Menus> listMenus = new ArrayList<>();
+
+            while (ite.hasNext()) {
+                Object[] obj = (Object[]) ite.next();
+                Menus menu = new Menus();
+                menu = (Menus) obj[0];
+                listMenus.add(menu);
+            }
+            return listMenus;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+
+    public Menus create(Menus menu) {
+        try {
+            sessionFactory.getCurrentSession().beginTransaction();
+            sessionFactory.getCurrentSession().save(menu);
+            sessionFactory.getCurrentSession().getTransaction().commit();
+            return menu;
+        } catch (Exception ex) {
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+            return null;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+
+    public Menus editImage(Menus menu) {
+        try {
+            if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                sessionFactory.getCurrentSession().getTransaction().begin();
+            }
+            String strQuery = "UPDATE Menus SET Image = '"+menu.getImage()+"' where Id= "+menu.getId();
+            Query query =   sessionFactory.getCurrentSession().createSQLQuery(strQuery);
+        //    query.setParameter("image", menu.getImage());
+           // query.setParameter("id", menu.getId());
+            query.executeUpdate();
+            sessionFactory.getCurrentSession().getTransaction().commit();
+            
+            return menu;
+        } catch (Exception ex) {
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+            return null;
+        } finally {
+            sessionFactory.getCurrentSession().close();
+        }
+    }
+    
+    public Menus edit(Menus menu){
+        try{
+            if (!sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                sessionFactory.getCurrentSession().getTransaction().begin();
+            }
+             sessionFactory.getCurrentSession().merge(menu);
+            sessionFactory.getCurrentSession().getTransaction().commit();
+            
+            return menu;
+        }catch(Exception ex){
+            sessionFactory.getCurrentSession().getTransaction().rollback();
+            return null;
+        }finally{
+            sessionFactory.getCurrentSession().close();
+        }
+    }
     
 }

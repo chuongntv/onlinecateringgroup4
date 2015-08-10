@@ -110,7 +110,7 @@ public class AccountController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap modelMap) {
         modelMap.put("account", new Accounts());
-        return "account/login";
+        return "h_accountcontroller_login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

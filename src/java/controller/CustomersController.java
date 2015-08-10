@@ -49,13 +49,13 @@ public class CustomersController {
     public String showAllCustomers(ModelMap modelMap) {
         List<Accounts> listAccounts = accountsDAO.findAllCustomers();
         modelMap.put("customers", listAccounts);
-        return "admin/customers_showall";
+        return "h_admin/customers_showall";
     }
     @RequestMapping(value = "/listCustomersBlock", method = RequestMethod.GET)
     public String showAllCustomersBlock(ModelMap modelMap) {
         List<Accounts> listAccounts = accountsDAO.findAllCustomersBlocked();
         modelMap.put("customersBlocked", listAccounts);
-        return "admin/customers_block_showall";
+        return "h_admin/customers_block_showall";
     }
     @RequestMapping(value = "/block/{id}", method = RequestMethod.GET)
     public String block(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession sessions) {

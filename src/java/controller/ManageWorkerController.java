@@ -93,7 +93,7 @@ public class ManageWorkerController {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            return "caterer/managementworkertypes_showall";
+            return "h_caterer/managementworkertypes_showall";
         } else {
             return "redirect:/account/login.htm";
         }
@@ -101,7 +101,7 @@ public class ManageWorkerController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute(value = "typeCreate") WorkerTypes typeCreate, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
+    public String create(@ModelAttribute(value = "typeCreate") WorkerTypes typeCreate, BindingResult bindingResult, ModelMap modelMap, HttpSession sessions) throws Exception {
         if (bindingResult.hasErrors()) {
             modelMap.put("message", "Create failed !");
             return "manageworker/managementworkertype_showall";
@@ -123,11 +123,11 @@ public class ManageWorkerController {
     public String edit(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession sessions) throws Exception {
 
         modelMap.put("typeEdit", typesDAO.findType(id));
-        return "caterer/managementworkertypes_showall";
+        return "h_caterer/managementworkertypes_showall";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(@ModelAttribute(value = "typeEdit") @Valid WorkerTypes type, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
+    public String edit(@ModelAttribute(value = "typeEdit") @Valid WorkerTypes type, BindingResult bindingResult, ModelMap modelMap, HttpSession sessions) throws Exception {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("messageEdit", "Edit Type failed !");
             return "redirect:/manageworker/listTypes/" + catererIdPublic + ".htm";
@@ -185,7 +185,7 @@ public class ManageWorkerController {
         modelMap.put("toDay", reportDate);
         modelMap.put("workers", list);
         modelMap.put("workerCreate", new Workers());
-        return "caterer/timekeeping";
+        return "h_caterer/timekeeping";
     }
 
     @RequestMapping(value = "/blockworker/{idworker}", method = RequestMethod.GET)
@@ -199,7 +199,7 @@ public class ManageWorkerController {
     @RequestMapping(value = "/createworker", method = RequestMethod.GET)
     public String createWorker(ModelMap modelMap) {
         modelMap.put("workerCreate", new Workers());
-        return "caterer/createworker";
+        return "h_caterer/createworker";
     }
 
     @RequestMapping(value = "/createworker", method = RequestMethod.POST)
@@ -251,11 +251,11 @@ public class ManageWorkerController {
             modelMap.put("workerEmailSalary", worker.getWorkerEmail());
             modelMap.put("workingDay", workerSalariesDAO.findWorkerToPayment(idWorker).getWorkingDay());
         }
-        return "caterer/payment";
+        return "h_caterer/payment";
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
-    public String paymentForWorker(@ModelAttribute(value = "paymentworker") @Valid WorkerSalaries workerSalariesUpdate, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
+    public String paymentForWorker(@ModelAttribute(value = "paymentworker") @Valid WorkerSalaries workerSalariesUpdate, BindingResult bindingResult, ModelMap modelMap, HttpSession sessions) throws Exception {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("messagePaymentNoti", "Worker's not Payment");
             return "redirect:/manageworker/listworkers/" + typeIdPublic + ".htm";
@@ -326,7 +326,7 @@ public class ManageWorkerController {
     public String editWorker(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession sessions) throws Exception {
 
         modelMap.put("workerEdit", workerDAO.findWorker(id));
-        return "caterer/editworker";
+        return "h_caterer/editworker";
     }
 
     @RequestMapping(value = "/editworker", method = RequestMethod.POST)

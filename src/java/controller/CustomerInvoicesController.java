@@ -48,12 +48,12 @@ public class CustomerInvoicesController {
                 Caterers cat = catDAO.findCatererByAccount(user.getId());
                 List<CustomerInvoices> listInvoices = cusDAO.getListByCaterer(cat.getId());
                 sessions.setAttribute("listInvoices", listInvoices);
-                return "invoicecus/index";
+                return "h_invoicecus/index";
             }
             if (user.getUserGroup().equals("customer")) {
                 List<CustomerInvoices> list = cusDAO.getList(user.getId());
                 sessions.setAttribute("listInvoices", list);
-                return "invoicecus/index";
+                return "h_invoicecus/index";
             }
             else return "redirect:/index.htm";
         } else {
@@ -78,7 +78,7 @@ public class CustomerInvoicesController {
             modelMap.put("invoice", customerInvoice);
 //            }
         }
-        return "invoicecus/child_detail";
+        return "h_invoicecus/child_detail";
     }
 
 
@@ -109,13 +109,13 @@ public class CustomerInvoicesController {
                 modelMap.put("invoice", cusDAO.findById(id));
                 WorkerTypesDAO workerTypesDAO = new WorkerTypesDAO();
                 modelMap.put("workerType", workerTypesDAO.getListWorkerType());
-                return "invoicecus/edit";
+                return "h_invoicecus/edit";
             }
         }
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(@ModelAttribute(value = "invoice") @Valid CustomerInvoices invoice, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
+    public String edit(@ModelAttribute(value = "invoice") @Valid CustomerInvoices invoice, BindingResult bindingResult, ModelMap modelMap, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Edit failed !");
             return "redirect:/index.htm";
@@ -135,13 +135,13 @@ public class CustomerInvoicesController {
                 return "redirect:/login.htm";
             } else {
                 modelMap.put("invoice", cusDAO.findById(id));
-                return "invoicecus/editStatus";
+                return "h_invoicecus/editStatus";
             }
         }
     }
 
     @RequestMapping(value = "/editStatus", method = RequestMethod.POST)
-    public String editStatus(@ModelAttribute(value = "invoice") @Valid CustomerInvoices invoice, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
+    public String editStatus(@ModelAttribute(value = "invoice") @Valid CustomerInvoices invoice, BindingResult bindingResult, ModelMap modelMap, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Edit failed !");
             return "redirect:/index.htm";

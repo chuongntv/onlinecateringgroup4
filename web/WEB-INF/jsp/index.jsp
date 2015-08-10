@@ -121,6 +121,8 @@
         <h3>Caterer</h3>
         <a href="${pageContext.request.contextPath}/ordercaterer/listsuppliers.htm">Go to Order Page</a><br>
         <a href="${pageContext.request.contextPath}/manageworker/listTypes/${userId}.htm">Management Worker</a><br>
+         <a href="${pageContext.request.contextPath}/menus/listmenus.htm" >Management Menu</a>
+        
         <p>Hello! This is the default welcome page for a Spring Web MVC project.</p>
         <a href="${pageContext.request.contextPath}/country/listCountries.htm">Show all countries</a><br>
    
