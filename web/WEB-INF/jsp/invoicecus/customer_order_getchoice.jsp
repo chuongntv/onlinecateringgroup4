@@ -14,6 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <h3></h3>
         <form method="post" action="getmenus.htm" >
             <table>
@@ -46,5 +47,6 @@
 
             <input type="submit" value="Next"/>
         </form>
+           <%@include file="../include/footer.jsp" %>
     </body>
 </html>

@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,9 +15,8 @@
     </head>
     <body>
         <h3>Edit menu ${menu.menuName}</h3>
-          <spring:form action="../../menus/editmenu.htm" commandName="menu" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
-              <input type="text" name="id" value="${menu.id}" hidden="true" readonly="true"/>
-              <table>
+          <spring:form action="../editmenu.htm" commandName="menu" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
+            <table>
                 <tr>
                     <td>
                         Menu Name:

@@ -28,26 +28,24 @@ public class CountriesController {
     CountriesDAO countryDAO = new CountriesDAO();    
 
     @RequestMapping(value = "/listCountries",method = RequestMethod.GET)
-    public String showAll(HttpSession sessions, ModelMap modelMap) {
+    public String showAll(HttpSession sessions) {
         try {
             List<Countries> listCountries = countryDAO.getCountries();
             sessions.setAttribute("countries", listCountries);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        modelMap.put("title", "Show all country");
-        return "h_countries_showall";
+        return "countries_showall";
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(ModelMap modelMap){
         modelMap.put("country", new Countries());
-        modelMap.put("title", "Create country");
-        return "h_countries_create";
+        return "countries_create";
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute(value = "country")Countries country, BindingResult bindingResult, ModelMap modelMap, HttpSession sessions) {
+    public String create(@ModelAttribute(value = "country")Countries country, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             modelMap.put("message", "Create failed !");
             return "countries_create";
@@ -66,8 +64,7 @@ public class CountriesController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable(value = "id") int id,ModelMap modelMap){
         modelMap.put("country",  countryDAO.findCountry(id));
-        modelMap.put("title", "Edit country");
-        return "h_countries_edit";
+        return "countries_edit";
     }
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String edit(@ModelAttribute(value = "country") @Valid Countries country, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
@@ -86,7 +83,6 @@ public class CountriesController {
         countryDAO.delete(countryDAO.findCountry(id));
 
         modelMap.put("countries", countryDAO.getCountries());
-        
-        return "h_countries_showall";
+        return "countries_showall";
     }
 }

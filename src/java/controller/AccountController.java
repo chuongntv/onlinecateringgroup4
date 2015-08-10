@@ -42,9 +42,7 @@ public class AccountController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String edit(ModelMap modelMap) {
         modelMap.put("account", new Accounts());
-        String regex = "membername_controllername_viewname";
         return "account/register";
-        
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -110,7 +108,7 @@ public class AccountController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap modelMap) {
         modelMap.put("account", new Accounts());
-        return "h_accountcontroller_login";
+        return "account/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

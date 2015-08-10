@@ -52,8 +52,17 @@ public class OrderController {
     MenuDao menuDao = new MenuDao();
 
     @RequestMapping(value = "/getcountry", method = RequestMethod.GET)
-    public String orderStep1(ModelMap modelMap) {
+    public String orderStep1(ModelMap modelMap, HttpSession session) {
         try {
+            if (session.getAttribute("user") == null) {
+                return "redirect:/account/login.htm";
+            } else {
+                Accounts acc = (Accounts) session.getAttribute("user");
+                if (!acc.getUserGroup().equals("customer")) {
+                    return "redirect:/account/login.htm";
+                }
+            }
+
             CountriesDAO countryDao = new CountriesDAO();
             List<Countries> list = countryDao.getCountries();
             modelMap.put("countries", list);
@@ -94,14 +103,19 @@ public class OrderController {
         return "invoicecus/customer_order_getmenus";
     }
     //List<String> listFoods = null;
-  //  int idMenu;
+    //  int idMenu;
 
     @RequestMapping(value = "/choosefoods/{id}", method = RequestMethod.GET)
-    public String orderStep4(@PathVariable(value = "id") int id, ModelMap modelMap,HttpSession session) {
+    public String orderStep4(@PathVariable(value = "id") int id, ModelMap modelMap, HttpSession session) {
         try {
-          //  idMenu = id;
-            if(session.getAttribute("user")==null){
+            //  idMenu = id;
+            if (session.getAttribute("user") == null) {
                 return "redirect:/account/login.htm";
+            } else {
+                Accounts acc = (Accounts) session.getAttribute("user");
+                if (!acc.getUserGroup().equals("customer")) {
+                    return "redirect:/account/login.htm";
+                }
             }
             session.setAttribute("idmenu", id);
             FoodsDAO foodDao = new FoodsDAO();
@@ -123,11 +137,11 @@ public class OrderController {
         //this.listFoods = listFoods;
         sessions.setAttribute("listfoods", listFoods);
         try {
-        /*    //////////////////////////////////
-            AccountsDAO accountsDAO = new AccountsDAO();
-            Accounts account = accountsDAO.findByUsername("thienly");
-            sessions.setAttribute("user", account);
-           ////////////////////////////////////// */
+            /*    //////////////////////////////////
+             AccountsDAO accountsDAO = new AccountsDAO();
+             Accounts account = accountsDAO.findByUsername("thienly");
+             sessions.setAttribute("user", account);
+             ////////////////////////////////////// */
 
             CustomerInvoices cusInvoke = new CustomerInvoices();
             Accounts acc = (Accounts) sessions.getAttribute("user");
@@ -145,13 +159,18 @@ public class OrderController {
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String orderStep5(@ModelAttribute(value = "customerinvoke") CustomerInvoices cusInvoke, ModelMap modelMap, HttpSession sessions) {
         try {
+
             CustomerInvokesDAO customerInvokesDAO = new CustomerInvokesDAO();
-            int idMenu = (Integer)sessions.getAttribute("idmenu");
+            int idMenu = (Integer) sessions.getAttribute("idmenu");
             List<String> listFoods = (List<String>) sessions.getAttribute("listfoods");
             Caterers caterer = menuDao.findMenu(idMenu).getCaterers();
             cusInvoke.setCaterers(caterer);
             Menus menu = menuDao.findMenu(idMenu);
             cusInvoke.setCostPerPlate(menu.getCostPerPlate());
+            if ((cusInvoke.getNumberOfPlate() < menu.getMinPlate()) || (cusInvoke.getNumberOfPlate() > menu.getMaxPlate())) {
+                modelMap.put("messagenumber", "Number of plate must be <" + menu.getMinPlate() + "and >" + menu.getMaxPlate());
+                return "invoicecus/customer_order_confirm";
+            }
 
             Accounts account = (Accounts) sessions.getAttribute("user");
             cusInvoke.setAccounts(account);
@@ -167,41 +186,43 @@ public class OrderController {
             SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
             //String inputString1
             String inputString2 = cusInvoke.getDeliveryDate();
-            
+            Date date2 = null;
             try {
                 Date date1 = new Date();
-                Date date2 = myFormat.parse(inputString2);
+                date2 = myFormat.parse(inputString2);
                 long diff = date2.getTime() - date1.getTime();
                 System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-                if(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) <7){
+                if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) < 7) {
                     modelMap.put("messagedate", "Date Delivery must be earlyer than now 7 days");
                     return "invoicecus/customer_order_confirm";
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            SimpleDateFormat myFormat2 = new SimpleDateFormat("MM/dd/yyyy");
             Date date = new Date();
-        /*    String year= String.valueOf(date.getYear());
-            String month= String.valueOf(date.getMonth());
-            String day= String.valueOf(date.getDate());
-            String invoiceDate = year+" "+month+" "+day;
-            cusInvoke.setInvoiceDate(invoiceDate);*/
-            cusInvoke.setInvoiceDate(myFormat.format(date));
+            /*    String year= String.valueOf(date.getYear());
+             String month= String.valueOf(date.getMonth());
+             String day= String.valueOf(date.getDate());
+             String invoiceDate = year+" "+month+" "+day;
+             cusInvoke.setInvoiceDate(invoiceDate);*/
+            cusInvoke.setInvoiceDate(myFormat2.format(date));
+            cusInvoke.setDeliveryDate(myFormat2.format(date2));
             cusInvoke.setStatus("waiting");
             CustomerInvoices cusInvoiceSuccess = customerInvokesDAO.create(cusInvoke);
-            if(listFoods != null){
+            if (listFoods != null) {
                 CustomerChildInvokesDAO customerChildInvokesDAO = new CustomerChildInvokesDAO();
-                for(String food : listFoods){
+                for (String food : listFoods) {
                     CustomerChildInvoices customerChildInvoices = new CustomerChildInvoices();
                     customerChildInvoices.setCustomerInvoices(cusInvoiceSuccess);
                     customerChildInvoices.setFoodName(food);
                     customerChildInvokesDAO.create(customerChildInvoices);
                 }
-            }else{
+            } else {
                 modelMap.put("message", "you must chose at least 1 item");
-                return "redirect:order/choosefoods/"+idMenu+".htm";
+                return "redirect:order/choosefoods/" + idMenu + ".htm";
             }
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

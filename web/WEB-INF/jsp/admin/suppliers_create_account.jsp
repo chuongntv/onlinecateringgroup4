@@ -11,10 +11,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Create Account</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <h3>Step 1: create account</h3>
         <p>${message}</p>
         <spring:form action="create_account.htm" method="POST" commandName="account" role="form"  > 
@@ -69,6 +70,7 @@
 
 
         </spring:form>
+        <%@include file="../include/footer.jsp" %>
         <script>
             //   $(document).ready(function (){
             function checkemail() {
@@ -103,5 +105,6 @@
             //    });
 
         </script>
+         
     </body>
 </html>

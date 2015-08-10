@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Result</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>${message}</h1>
+         <%@include file="../include/footer.jsp" %>
     </body>
 </html>

@@ -14,6 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <h3>Step2: Create supplier</h3>
         <span>${message}</span>
         <spring:form action="create_supplier.htm" commandName="supplier" role="form"  method="POST" >
@@ -62,5 +63,6 @@
 
 
         </spring:form>
+               <%@include file="../include/footer.jsp" %>
     </body>
 </html>

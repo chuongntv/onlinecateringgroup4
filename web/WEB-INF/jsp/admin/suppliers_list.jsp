@@ -4,17 +4,14 @@
     Author     : MSI
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manage Supplier</title>
-    </head>
-    <body>
+
+
+   
+        <%@include file="../include/header.jsp" %>
         <h1>Supplier List</h1>
         <form action="search.htm" method="post">
             <input type="text" name="name" placeholder="Input name, phone, email"/>
@@ -58,5 +55,6 @@
 </table>
         <br>
         <a href="${pageContext.request.contextPath}/suppliers/create_account.htm">Create Supplier</a>
-</body>
-</html>
+        <%@include file="../include/footer.jsp" %>
+    
+

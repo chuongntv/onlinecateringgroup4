@@ -33,6 +33,7 @@
 
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <spring:form action="confirm.htm" method="POST" commandName="customerinvoke" >
             <input name="accounts.id" readonly="true" hidden="true" value="${customerinvoke.accounts.id}">
             <table>
@@ -58,7 +59,7 @@
 
         </spring:form>
 
-
+   <%@include file="../include/footer.jsp" %>
     </body>
 
 </html>

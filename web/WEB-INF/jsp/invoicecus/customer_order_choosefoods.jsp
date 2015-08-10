@@ -15,6 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h3>choose your foods</h3>
         <span>${message}</span>
         <form action="../choosefoods.htm" method="post">
@@ -48,5 +49,6 @@
             </c:forEach> 
             <input type="submit" value="Next"/>
         </form>
+         <%@include file="../include/footer.jsp" %>
     </body>
 </html>

@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import model.dao.AccountsDAO;
 import model.dao.CategoriesDAO;
 import model.dao.CatererDAO;
 import model.dao.FoodsDAO;
@@ -53,7 +52,6 @@ public class MenusController {
     @RequestMapping(value = "/listmenus", method = RequestMethod.GET)
     public String listMenus(ModelMap modelMap, HttpSession session) {
         try {
-           
             if (session.getAttribute("user") == null) {
                 return "redirect:/account/login.htm";
             } else {
@@ -62,12 +60,6 @@ public class MenusController {
                     return "redirect:/account/login.htm";
                 }
             }
-         /*   Accounts acc = new Accounts();
-            AccountsDAO accDao = new AccountsDAO();
-            acc= accDao.findByUsername("rockvile");
-            session.setAttribute("user", acc);
-                    */
-            
             Accounts user = (Accounts) session.getAttribute("user");
             Caterers caterer = CatererDAO.findCatererByAccount(user.getId());
             List<Menus> listMenu = menuDao.listMenuByCaterer(caterer.getId());
@@ -76,7 +68,7 @@ public class MenusController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return "h_caterer/menus_list";
+        return "caterer/menus_list";
     }
 
     @RequestMapping(value = "/editimage/{id}", method = RequestMethod.GET)
@@ -88,11 +80,11 @@ public class MenusController {
         } catch (Exception ex) {
 
         }
-        return "h_caterer/menus_editimage";
+        return "caterer/menus_editimage";
     }
 
     @RequestMapping(value = "/editimage", method = RequestMethod.POST)
-    public String editImage(@ModelAttribute(value = "menu") Menus menu, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, ModelMap mm, HttpSession session, HttpServletRequest request) {
+    public String editImage(@ModelAttribute(value = "menu") Menus menu, @RequestParam(value = "file", required = false) MultipartFile file, ModelMap mm, BindingResult bindingResult, HttpSession session, HttpServletRequest request) {
         try {
             if (bindingResult.hasErrors()) {
                 mm.put("message", "Update Astist failed !");
@@ -163,7 +155,7 @@ public class MenusController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return "h_caterer/menus_create";
+        return "caterer/menus_create";
 
     }
 
@@ -203,7 +195,7 @@ public class MenusController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return "redirect:../menus/listmenus.htm";
+        return "redirect:menus/listmenus.htm";
 
     }
 
@@ -225,28 +217,28 @@ public class MenusController {
         Menus menu = menuDao.findMenu(id);
         modelMap.put("menu", menu);
 
-        return "h_caterer/menus_editmenu";
+        return "caterer/menus_editmenu";
     }
 
     @RequestMapping(value = "/editmenu", method = RequestMethod.POST)
-    public String editMenu(@ModelAttribute(value = "menu") Menus menu, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+    public String editMenu(@ModelAttribute(value = "menu") Menus menu, ModelMap modelMap, HttpSession session, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             modelMap.put("message", "Update Astist failed !");
-            return "h_caterer/menus_editmenu";
+            return "caterer/menus_editmenu";
         }
 
         if (menu.getMinPlate() >= menu.getMaxPlate()) {
             modelMap.put("minplateerror", "Min plate must be < max plate");
-            return "h_caterer/menus_editmenu";
+            return "caterer/menus_editmenu";
 
         }
         if (menu.getMinPlate() <= 0) {
             modelMap.put("minplateerror", "Min plate must be >0");
-            return "h_caterer/menus_editmenu";
+            return "caterer/menus_editmenu";
         }
         if (menu.getMaxPlate() <= 0) {
             modelMap.put("maxplateerror", "Max plate must be >0");
-            return "h_caterer/menus_editmenu";
+            return "caterer/menus_editmenu";
         }
         Menus menuTemp = menuDao.findMenu(menu.getId());
         menuTemp.setMenuName(menu.getMenuName());
@@ -286,7 +278,7 @@ public class MenusController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return "h_caterer/menus_menudetail";
+        return "caterer/menus_menudetail";
     }
 
     @RequestMapping(value = "/createfood/{id}", method = RequestMethod.GET)
@@ -299,7 +291,7 @@ public class MenusController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return "h_caterer/menus_createfood";
+        return "caterer/menus_createfood";
     }
 
     @RequestMapping(value = "/createfood", method = RequestMethod.POST)
@@ -328,7 +320,7 @@ public class MenusController {
         foods = foodsDAO.findFoodById(id);
         modelMap.put("food", foods);
 
-        return "h_caterer/menus_editfoodimage";
+        return "caterer/menus_editfoodimage";
     }
 
     @RequestMapping(value = "/editfoodimage", method = RequestMethod.POST)
@@ -400,7 +392,7 @@ public class MenusController {
         Foods food = foodsDAO.findFoodById(id);
         modelMap.put("food", food);
 
-        return "h_caterer/menus_editfood";
+        return "caterer/menus_editfood";
     }
 
     @RequestMapping(value = "/editfood", method = RequestMethod.POST)
@@ -464,11 +456,11 @@ public class MenusController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return "h_caterer/menus_createsubmenu";
+        return "caterer/menus_createsubmenu";
     }
 
     @RequestMapping(value = "/createsubmenu", method = RequestMethod.POST)
-    public String createSubmenu(@ModelAttribute(value = "submenu") SubMenus submenu, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+    public String createSubmenu(@ModelAttribute(value = "submenu") SubMenus submenu, ModelMap modelMap, HttpSession session, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 modelMap.put("message", "Create failed !");
@@ -501,11 +493,11 @@ public class MenusController {
         subMenus = subMenuDao.findSubMenuById(id);
         modelMap.put("submenu", subMenus);
 
-        return "h_caterer/menus_editsubmenu";
+        return "caterer/menus_editsubmenu";
     }
 
     @RequestMapping(value = "/editsubmenu", method = RequestMethod.POST)
-    public String editSubMenu(@ModelAttribute(value = "submenu") SubMenus submenu, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+    public String editSubMenu(@ModelAttribute(value = "submenu") SubMenus submenu, ModelMap modelMap, HttpSession session, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             modelMap.put("message", "Update Astist failed !");
             return "careter/menus_editsubmenu";
@@ -540,7 +532,7 @@ public class MenusController {
             modelMap.put("submenu",subMenus);
             modelMap.put("listfoods", listFoods);
             modelMap.put("number", number);
-            return "h_caterer/menus_resultsubmenudelete";
+            return "caterer/menus_resultsubmenudelete";
             
         }
 

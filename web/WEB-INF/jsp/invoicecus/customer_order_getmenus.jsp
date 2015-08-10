@@ -11,36 +11,31 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Choose menu</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <h3>List menu</h3>
-        <table>
-            <tr>
-                <td>
-                    Menu Name
-                </td>
-                <td>
-                    Cost
-                </td>
-                <td>
-                    Caterer Name
-                </td>
-            </tr>
+
             <c:forEach items="${listmenu}" var="menu">
-            <tr>
-               
-                <td>
-                    <a href="${pageContext.request.contextPath}/order/choosefoods/${menu.id}.htm">${menu.menuName}</a>
-                </td>
-                <td>
-                    ${menu.costPerPlate} $/Plate
-                </td>
-                <td>
-                    ${menu.caterers.catererName}
-                </td>
-            </tr>
+        
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td><div>
+                                <img src="${pageContext.request.contextPath}${menu.image}" width="70" height="100"/>
+                            </div></td>
+                            <td><div>
+                                    <h4><a href="${pageContext.request.contextPath}/order/choosefoods/${menu.id}.htm">${menu.menuName}</a></h4>
+                                 Cost per plate: ${menu.costPerPlate} $/Plate
+                                 Caterer Name: ${menu.caterers.catererName}
+                                </div></td>
+                    </tr>
+                </table>
+            </div>
+            
             </c:forEach>
-        </table>
+      
+         <%@include file="../include/footer.jsp" %>
     </body>
 </html>
