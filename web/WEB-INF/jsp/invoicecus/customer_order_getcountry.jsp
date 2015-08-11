@@ -22,7 +22,7 @@
                     <option value="${country.id}">${country.countryName}</option>
                 </c:forEach>
             </select>
-            <input type="submit" value="Next"/>
+            <input type="submit" value="Next" class="btn btn-primary"/>
         </form>
         <%@include file="../include/footer.jsp" %>
     </body>

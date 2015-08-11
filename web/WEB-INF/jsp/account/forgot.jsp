@@ -19,7 +19,7 @@
             <h2>Type your username and your email in the form. We will send you your password</h2>
             Username: <spring:input path="username" required="required"/><br/>
             Email: <spring:input path="email" type="email" required="required"/><br/>            
-            <button type="submit">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </spring:form>
             <%@include file="../include/footer.jsp" %>
     </body>

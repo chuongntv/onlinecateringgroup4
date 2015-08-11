@@ -47,7 +47,7 @@
                     </c:forEach> 
                 </div>
             </c:forEach> 
-            <input type="submit" value="Next"/>
+            <input type="submit" value="Next" class="btn btn-primary"/>
         </form>
         <%@include file="../include/footer.jsps" %>
     </body>

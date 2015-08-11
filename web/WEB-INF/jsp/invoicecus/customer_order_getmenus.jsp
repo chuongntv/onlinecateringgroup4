@@ -16,7 +16,7 @@
     <body>
         <%@include file="../include/header.jsp" %>
         <h3>List menu</h3>
-        <table>
+        <table class="table table-striped">
             <tr>
                 <td>
                     Menu Name

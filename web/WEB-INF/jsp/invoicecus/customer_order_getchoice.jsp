@@ -17,7 +17,7 @@
         <%@include file="../include/header.jsp" %>
         <h3></h3>
         <form method="post" action="getmenus.htm" >
-            <table>
+            <table class="table table-striped">
                 <tr>
                     <td>Categories:</td>
                     <td>            <select name="cateid">
@@ -45,7 +45,7 @@
 
 
 
-            <input type="submit" value="Next"/>
+            <input type="submit" value="Next" class="btn btn-primary"/>
         </form>
         <%@include file="../include/footer.jsp" %>
     </body>

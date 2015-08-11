@@ -19,7 +19,7 @@
         <h3>Welcome ${user.username}</h3>
         Give me a id for userId: ${user.id}
         <a  href="${pageContext.request.contextPath}/account/update.htm"> Update</a>
-        <table border="1">
+        <table class="table table-striped">
             <tr class="info">                
                 <th>ID</th>                
                 <th>User Name</th>                               
@@ -45,7 +45,7 @@
                     <th>${account.dateOfBirth}</th>
                     <th>${account.phoneNumber}</th>
                     <th>${account.status}</th>  
-                    <td><a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/account/edit/${account.id}.htm"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+                    <td><a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/account/edit/${account.id}.htm" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
                 </tr> 
             </c:forEach>
         </table>                      

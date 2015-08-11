@@ -19,7 +19,7 @@
         <%@include file="../include/header.jsp" %>
         <h1>Account Management</h1>
         <h2>Welcome ${user.username}</h2>                
-        <table border="1">
+        <table class="table table-striped">
             <tr class="info">                
                 <th>ID</th>                
                 <th>Customer Name</th>      
@@ -51,16 +51,16 @@
                     <th>${list.status}</th>  
                         <c:set var="userGroup" scope="session" value="${user.userGroup}"/>
                         <c:if test="${userGroup=='caterer'}">
-                        <td><a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/customerInvoice/edit/${list.id}.htm"><span class="glyphicon glyphicon-edit"></span> Edit Customer</a>
+                        <td><a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/customerInvoice/edit/${list.id}.htm" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit Worker</a>
                         </td>
                     </c:if>
                     <td>
                         <c:set var="workerName" scope="session" value="${list.workers.workerName}"/>
                         <c:if test="${workerName!=null||userGroup=='customer'}">                        
-                            <a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/customerInvoice/editStatus/${list.id}.htm"><span class="glyphicon glyphicon-edit"></span> Edit Status</a>
+                            <a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/customerInvoice/editStatus/${list.id}.htm" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit Status</a>
                         </c:if>
                     </td>
-                    <td><a href="${pageContext.request.contextPath}/customerInvoice/detail/${list.id}.htm">View Detail</a></td>
+                    <td><a href="${pageContext.request.contextPath}/customerInvoice/detail/${list.id}.htm" class="btn btn-primary">View Detail</a></td>
                 </tr> 
             </c:forEach>
         </table>           

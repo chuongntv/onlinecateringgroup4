@@ -5,20 +5,19 @@
 --%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+   
+        <%@include file="../include/header.jsp" %>
         <title>Register</title>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<!--        <script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>        
         <script>
             $(function () {
                 $("#dateOfBirth").datepicker();
             });
         </script>
-        <script type="text/javascript">
+         <script type="text/javascript">
             function check() {
                 var pass1 = document.getElementById('pass1');
                 var pass2 = document.getElementById('pass2');
@@ -52,18 +51,15 @@
                 })
             })
         </script>
-    </head>
-    <body>
-        <%@include file="../include/header.jsp" %>
-        <h1>Register!</h1>
+        <h2>Register!</h2>
         <h2>${message}</h2>
         <spring:form action="register.htm" commandName="account" method="POST" class="form-horizontal" role="form">       
             Username: <spring:input path="username" required="required"/><br/>
             Password: <spring:password path="password" required="required" id="pass1"/><br/>
             Retype-password: <input type="password" id="pass2" name="pass2" required onkeyup="check();
                             return false;"/><span id="confirmMessage" class="confirmMessage"></span><br/>
-            User Group: <spring:radiobutton path="userGroup" value="customer"/>Customer<br/>
-            <spring:radiobutton path="userGroup" value="caterer"/>Caterer<br/>
+            User Group: <spring:radiobutton path="userGroup" value="customer"/>Customer
+            <spring:radiobutton path="userGroup" value="caterer"/>Caterer
             <spring:radiobutton path="userGroup" value="supplier"/>Supplier<br/>
             <br/>
             Email: <spring:input type="email" path="email" required="required"/><br/>
@@ -72,7 +68,7 @@
             Date Of Birth:<spring:input path="dateOfBirth"/><br/>
             Phone Number:<spring:input path="phoneNumber" type="number"/><br/>
             <input type="hidden" name="status" value="0"/>
-            <button type="submit"> Create</button>
+            <button type="submit" class="btn btn-primary"> Create</button>
         </spring:form>
         <%@include file="../include/footer.jsp" %>
     </body>

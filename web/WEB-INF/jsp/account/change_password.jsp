@@ -58,9 +58,9 @@
             Password: <spring:password id="pass1" path="password" required="required" /><br/>
             Retype-password: <input id="pass2" type="password" name="pass2" required onkeyup="check();
                             return false;"/><span id="confirmMessage" class="confirmMessage"></span><br/>
-            <input type="submit" value="Save"/> 
+            <input type="submit" value="Save" class="btn btn-primary"/> 
         </spring:form>
-        <a  href="${pageContext.request.contextPath}/account/info.htm">Back to info</a>
+        <a  href="${pageContext.request.contextPath}/account/info.htm" >Back to info</a>
         <%@include file="../include/footer.jsp" %>
     </body>
 </html>

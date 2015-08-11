@@ -33,7 +33,7 @@
             Address:<spring:input path="supplierAddress" required="required"/><br/>
             Description:<spring:textarea path="supplierDescription"/><br/>
             Phone Number:<spring:input path="supplierPhoneNumber" type="number"/><br/>            
-            <button type="submit"> Create</button>
+            <button type="submit" class="btn btn-primary"> Create</button>
         </spring:form>
         <%@include file="../include/footer.jsp" %>
     </body>

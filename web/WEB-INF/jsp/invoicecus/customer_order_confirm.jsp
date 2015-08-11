@@ -55,7 +55,7 @@
                 </tr>
             </table>
 
-            <input type="submit" value="Order"  />
+            <input type="submit" value="Order" class="btn btn-primary" />
 
         </spring:form>
 
