@@ -10,18 +10,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Create Worker</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Create Worker</h1>
-        <h4>${messageCreate}</h4>
+        <style>.table th, .table td { 
+                border-top: none !important; 
+            }
+        </style>
         <form action="../manageworker/createworker.htm" commandName="workerCreate" method="POST">  
-            Name: <input name="workerName" required/><br>
-            Email: <input name="workerEmail" type="email" required/><br>
-            Phone Number: <input name="workerPhoneNumber" required/><br>
-            Address: <input name="workerAddress" required/><br>
-            <input type="submit" value="Create">           
+            <table class="table">
+                <tr>
+                    <td width="13%"><strong>Name: </strong></td>
+                    <td ><strong><input name="workerName" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Email: </strong></td>
+                    <td ><strong><input name="workerEmail" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Phone Number: </strong></td>
+                    <td ><strong><input name="workerPhoneNumber" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Address: </strong></td>
+                    <td ><strong><input name="workerAddress" required/></strong></td>
+                </tr>
+
+            </table>  
+            <input type="submit" value="Create" class="btn btn-primary">         
         </form> 
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>
 

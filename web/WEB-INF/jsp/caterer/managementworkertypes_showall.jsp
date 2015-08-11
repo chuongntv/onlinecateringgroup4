@@ -35,44 +35,45 @@
         </script>
     </head>
     <body onload="setCatererId();">
-        <h1>Hello World!</h1>
-        <h1>Create Worker Type!</h1>
-        <h4>${messageCreate}</h4>
+        <%@include file="../include/header.jsp" %>
+        <h1>Create Worker Type</h1><br><br>
         <form action="../create.htm" commandName="typeCreate" method="POST">  
-            Type Name: <input name="workerTypeName"/><br>
-            Pay Per Day: <input name="payPerDay" type="number" step="0.01"/>
-            <input type="submit" value="Create">           
+            <br><strong>Type Name: <input name="workerTypeName"/></strong><br>
+            <strong>Pay Per Day: <input name="payPerDay" type="number" step="0.01"/></strong><br>
+            <input type="submit" value="Create" class="btn btn-primary">           
         </form> 
         <hr>
-        <h1>Edit Type</h1>
-        <h4>${messageEdit}</h4>
+        <hr>
+        <h1>Edit Type</h1><br><br>
         <spring:form action="../manageworker/edit.htm" commandName="typeEdit" method="POST" class="form-horizontal" role="form">   
             <input type="hidden" name="idStr" value="${requestScope.id}"/>
             <input type="hidden" name="id" value="${typeEdit.id}"/>
             ${workerType.workerTypeName}
-            Type Name: <spring:input path="workerTypeName" /><br>
-            Pay Per Day: <spring:input path="payPerDay"  type="number" step="0.01"/>                                                     
-            <input type="submit" value="Save" onclick="form.action = '${pageContext.request.contextPath}/manageworker/edit.htm';">
-            <input type="submit" value="Cancel" onclick="form.action = '${pageContext.request.contextPath}/manageworker/cancel.htm';"/>
+            <br><strong>Type Name: <spring:input path="workerTypeName" /></strong><br>
+            <strong>Pay Per Day: <spring:input path="payPerDay"  type="number" step="0.01"/>  </strong>   <br>                                                
+            <input type="submit" value="Save" onclick="form.action = '${pageContext.request.contextPath}/manageworker/edit.htm';" class="btn btn-primary">
+            <input type="submit" value="Cancel" onclick="form.action = '${pageContext.request.contextPath}/manageworker/cancel.htm';" class="btn btn-warning"/>
         </spring:form> 
         <hr>
+        <hr>
         <h1>List of Worker Types</h1>
-        <table border="" >
-            <tr class="info">               
-                <th>Type Name</th>
-                <th>Pay Per Day</th>
-                <th colspan="2">Options</th>
+        <table class="table table-striped">
+            <tr>               
+                <td><strong>Type Name</strong></td>
+                <td><strong>Pay Per Day</strong></td>
+                <td colspan="4"><strong>Options</strong></td>
             </tr>
             <c:forEach items="${types}" var="type">
                 <tr>         
                     <td>${type.workerTypeName}</td>
                     <td>${type.payPerDay}</td>                    
-                    <td><a href="${pageContext.request.contextPath}/manageworker/edit/${type.id}.htm">Edit</a></td>
-                    <td><a  href="${pageContext.request.contextPath}/manageworker/delete/${type.id}.htm" > Delete</a></td>                    
-                    <td><a  href="${pageContext.request.contextPath}/manageworker/listworkers/${type.id}.htm" > Timekeeping</a></td>
-                    <td><a  href="${pageContext.request.contextPath}/manageworker/listworkers/${type.id}.htm" > Manager</a></td>
+                    <td><a href="${pageContext.request.contextPath}/manageworker/edit/${type.id}.htm" class="btn btn-primary">Edit</a></td>
+                    <td><a  href="${pageContext.request.contextPath}/manageworker/delete/${type.id}.htm" class="btn btn-danger"> Delete</a></td>                    
+                    <td><a  href="${pageContext.request.contextPath}/manageworker/listworkers/${type.id}.htm" class="btn btn-primary"> Timekeeping</a></td>
+                    <td><a  href="${pageContext.request.contextPath}/manageworker/listworkers/${type.id}.htm"class="btn btn-primary" > Manager</a></td>
                 </tr> 
             </c:forEach>
         </table> 
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

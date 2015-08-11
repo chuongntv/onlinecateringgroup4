@@ -35,13 +35,15 @@
         </script>
     </head>
     <body onload="setCatererId();">
+        <%@include file="../include/header.jsp" %>
         <h1>List Suppliers</h1>       
         <c:forEach items="${suppliers}" var="supplier">
-            <a href="${pageContext.request.contextPath}/ordercaterer/listmaterialcategories/${supplier.id}.htm">
+            <a href="${pageContext.request.contextPath}/ordercaterer/listmaterialcategories/${supplier.id}.htm" class="btn btn-primary">
                 <div style="background-color: #CCCCFF">
                     <h1>${supplier.supplierName}</h1>
                 </div>
             </a>
         </c:forEach> 
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

@@ -9,16 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Create Material Category</title>
     </head>
     <body>
-        <h1>Create Material Category!</h1>
-        <h4>${messageCreate}</h4>
+        <%@include file="../include/header.jsp" %>
+        <h1>Create Material Category</h1><br>
         <form action="../materialcategories/create.htm" commandName="category" method="POST">  
             <input type="hidden" name="supplierId" value="${userId}"/>
             Category Name: <input name="categoryName"/>                                                     
-            <input type="submit" value="Create">           
+            <input type="submit" value="Create" class="btn btn-primary">           
         </form> 
-        <hr>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

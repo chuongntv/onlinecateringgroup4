@@ -11,9 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Payment For Worker</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Payment For Worker</h1>
         <spring:form action="../payment.htm" commandName="paymentworker" method="POST">   
             <input type="hidden" name="id" value="${paymentworker.id}"/>
@@ -26,8 +27,8 @@
             <spring:radiobutton path="payType" value="quarter"/>Quarter
             <spring:radiobutton path="payType" value="year"/>year<br>
             ${messgePayment}
-            <input type="submit" value="Payment">
+            <input type="submit" value="Payment" class="btn btn-primary">
         </spring:form> 
-        <hr>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

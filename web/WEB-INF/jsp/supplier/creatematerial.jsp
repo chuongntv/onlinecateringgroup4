@@ -11,19 +11,34 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Create Material</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Create Material </h1>
-        <h4>${messageCreate}</h4>
+        <style>.table th, .table td { 
+                border-top: none !important; 
+            }
+        </style>
         <spring:form action="../materials/create.htm" commandName="materialCreate" method="POST">  
             <input type="hidden" name="categoryId" value="${requestScope.categoryId}"/>
-            Material Name: <input name="materialName" required/><br>
-            Material Unit: <input type="text" name="materialUnit" required/><br>  
-            Price per Unit: <input type="number" name="materialPricePerUnit" required/><br>
-            <input type="submit" value="Create">           
+            <table class="table">
+                <tr>
+                    <td width="13%"><strong>Material Name: </strong></td>
+                    <td ><strong><input name="materialName" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Material Unit: </strong></td>
+                    <td ><strong><input type="text" name="materialUnit" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Price per Unit: </strong></td>
+                    <td ><strong><input type="number" name="materialPricePerUnit" required/></strong></td>
+                </tr>
+            </table>
+            <input type="submit" value="Create"  class="btn btn-primary">           
         </spring:form> 
-        <hr>
-        
+        <%@include file="../include/footer.jsp" %>
+
     </body>
 </html>

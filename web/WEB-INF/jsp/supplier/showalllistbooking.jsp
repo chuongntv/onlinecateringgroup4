@@ -15,38 +15,39 @@
         <script type="text/javascript" language="javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>
         <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>
         <script type='text/javascript' >
-            function setCatererId() {
-                $.ajax({
-                    type: "post",
-                    url: "${pageContext.request.contextPath}/checkbooking/setUserId.htm",
-                    cache: true,
-                    data: 'catererId=${userId}',
-                    success: function (data) {
-                        if (data == "error") {
-                            window.location.href = '${pageContext.request.contextPath}/account/login.htm';
-                        }
-                    },
-                    error: function () {
-                        window.location.href = '${pageContext.request.contextPath}/account/login.htm';
-                    }
-                });
-            }
+//            function setCatererId() {
+//                $.ajax({
+//                    type: "post",
+//                    url: "${pageContext.request.contextPath}/checkbooking/setUserId.htm",
+//                    cache: true,
+//                    data: 'catererId=${userId}',
+//                    success: function (data) {
+//                        if (data == "error") {
+//                            window.location.href = '${pageContext.request.contextPath}/account/login.htm';
+//                        }
+//                    },
+//                    error: function () {
+//                        alert('Something went wrong...');
+//                    }
+//                });
+//            }
             //window.onpaint = setCatererId();
         </script>
     </head>
     <body >
-        
-        <a href="${pageContext.request.contextPath}/checkbooking/showlistshipping.htm">Show all bills shipping</a><br>
-        <a href="${pageContext.request.contextPath}/checkbooking/showlistcompleted.htm">Show all bills Completed</a>
-        <a href="${pageContext.request.contextPath}/checkbooking/showlistcancel.htm">Show all bills Cancel</a>
-        <h1>List Booking waiting</h1>
-        <table border="1">
+        <%@include file="../include/header.jsp" %>
+        <a href="${pageContext.request.contextPath}/checkbooking/listbooking.htm" class="btn btn-primary">Show all bills Waiting</a>
+        <a href="${pageContext.request.contextPath}/checkbooking/showlistshipping.htm" class="btn btn-primary">Show all bills shipping</a>
+        <a href="${pageContext.request.contextPath}/checkbooking/showlistcompleted.htm" class="btn btn-primary">Show all bills Completed</a>
+        <a href="${pageContext.request.contextPath}/checkbooking/showlistcancel.htm" class="btn btn-primary">Show all bills Cancel</a>
+        <h1>List Booking waiting</h1><br>
+        <table class="table table-striped">
             <tr>
-                <td>Caterer Name</td>
-                <td>Invoice Date</td>
-                <td>Delivery Date</td>
-                <td>Status</td>
-                <td colspan="4">Option</td>
+                <td><strong>Caterer Name</strong></td>
+                <td><strong>Invoice Date</strong></td>
+                <td><strong>Delivery Date</strong></td>
+                <td><strong>Status</strong></td>
+                <td colspan="4"><strong>Option</strong></td>
             </tr>
             <c:forEach items="${listbookings}" var="booking">
                 <tr>
@@ -54,9 +55,9 @@
                     <td>${booking.invoiceDate}</td>
                     <td>${booking.deliveryDate}</td>
                     <td>${booking.status}</td>
-                    <td><button onclick="showdetails(${booking.id});" >View Details</button></td>
-                    <form><td><input type="submit" value="Shipping" onclick="form.action ='${pageContext.request.contextPath}/checkbooking/shipping/${booking.id}.htm';"></td>
-                    <td><input type="submit" value="Cancel" onclick="form.action ='${pageContext.request.contextPath}/checkbooking/cancel/${booking.id}.htm';"></td></form>
+                    <td><button onclick="showdetails(${booking.id});" class="btn btn-info ">View Details</button></td>
+                    <form><td><input type="submit" value="Shipping" onclick="form.action ='${pageContext.request.contextPath}/checkbooking/shipping/${booking.id}.htm';" class="btn btn-primary"></td>
+                    <td><input type="submit" value="Cancel" onclick="form.action ='${pageContext.request.contextPath}/checkbooking/cancel/${booking.id}.htm';" class="btn btn-danger"></td></form>
                 </tr> 
             </c:forEach>
         </table>
@@ -78,5 +79,6 @@
                 });
             }
         </script>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

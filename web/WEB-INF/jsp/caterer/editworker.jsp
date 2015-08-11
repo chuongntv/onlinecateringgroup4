@@ -11,11 +11,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Edit Worker</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Edit Worker</h1>
-        <h4>${messageEdit}</h4>
         <spring:form action="../editworker.htm" commandName="workerEdit" method="POST">   
             <input type="hidden" name="idStr" value="${requestScope.id}"/>
             <input type="hidden" name="id" value="${workerEdit.id}"/>
@@ -25,9 +25,9 @@
             Address: <spring:input path="workerAddress" />    <br>                                               
             Status: <spring:radiobutton path="status" value="1"/>Block
             <spring:radiobutton path="status" value="0"/>Is Active<br>
-            <input type="submit" value="Save" onclick="form.action = '${pageContext.request.contextPath}/manageworker/editworker.htm';">
-            <input type="submit" value="Cancel" onclick="form.action = '${pageContext.request.contextPath}/manageworker/cancelworker.htm';"/>
+            <input type="submit" value="Save" onclick="form.action = '${pageContext.request.contextPath}/manageworker/editworker.htm';" class="btn btn-primary">
+            <input type="submit" value="Cancel" onclick="form.action = '${pageContext.request.contextPath}/manageworker/cancelworker.htm';" class="btn btn-warning"/>
         </spring:form> 
-        <hr>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

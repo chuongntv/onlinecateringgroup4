@@ -249,11 +249,11 @@ public class OrderCatererController {
         }
 
         result += "<h1>My Bill</h1>";
-        result += "<table border='1' >"
+        result += "<table class=\"table table-striped\">"
                 + "<tr>"
-                + "<th> Material Name </th>"
-                + "<th> Price/Unit</th>"
-                + "<th>Quantity</th>"
+                + "<td><strong> Material Name </strong></td>"
+                + "<td><strong> Price/Unit</strong></td>"
+                + "<td><strong>Quantity</strong></td>"
                 + "</tr>" + "";
         for (SupplierChildInvoices item : listInvoiceChildPublic) {
             result += "<tr>"
@@ -261,8 +261,8 @@ public class OrderCatererController {
                     + "<td>" + item.getMaterialPricePerUnit() + "</td>"
                     + "<td>" + item.getQuantity() + "</td></tr>";
         }
-        result += "</table><br>";
-        result += "<button onclick='chooseDeliveryDate();'>Completed</button>";
+        result += "</table>";
+        result += "<button onclick='chooseDeliveryDate();' class=\"btn btn-primary\">Completed</button>";
         return result;
     }
 
@@ -302,23 +302,22 @@ public class OrderCatererController {
         categoryIdPPublic = categoryId;
         List<Materials> listMaterials = materialsDAO.getAllMaterialsByCategoryId(categoryId);
         //String result = "<br>Next Random # is <b>" + r + "</b>. Generated on <b>" + new Date().toString() + "</b>";
-        String result = "<table border='1' >"
+        String result = "<table class=\"table table-striped\">"
                 + "<tr>"
-                + "<th> ID </th>"
-                + "<th> Name </th>"
-                + "<th><strong> Price/Unit</strong></th>"
-                + "<th>Amount</th>"
+                + "<td><strong> Name</strong> </td>"
+                + "<td><strong> Price/Unit</strong></td>"
+                + "<td><strong>Amount</strong></td>"
                 + "</tr>" + "";
         for (Materials material : listMaterials) {
-            result += "<tr><td>" + material.getId() + "</td>"
+            result += "<tr>"
                     + "<td>" + material.getMaterialName() + "</td>"
                     + "<td>" + material.getMaterialPricePerUnit() + "/" + material.getMaterialUnit() + "</td>"
                     + "<td>" + "<input class='amount' type='number' value='0' placeholder='Number of " + material.getMaterialUnit() + "' " + "</td></tr>";
         }
-        result += "</table><br>";
+        result += "</table>";
         //result += "<input type='hidden' id='categoryId' value='" + categoryId + "'/>";
         //result += "<input type=\"button\" value=\"Add to bill\" onclick='addToBill();'/>";
-        result += "<button onclick='addToBill();'>Add To Bill</button>";
+        result += "<button onclick='addToBill();' class=\"btn btn-primary\">Add To Bill</button>";
         //result += "<button onclick='showMaterials("+categoryId+");'>Add To Bill</button>";
         return result;
     }

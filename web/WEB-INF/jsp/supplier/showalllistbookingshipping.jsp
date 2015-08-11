@@ -16,15 +16,19 @@
         <title>List Booking Shipping</title>
     </head>
     <body>
-
+        <%@include file="../include/header.jsp" %>
+        <a href="${pageContext.request.contextPath}/checkbooking/listbooking.htm" class="btn btn-primary">Show all bills Waiting</a>
+        <a href="${pageContext.request.contextPath}/checkbooking/showlistshipping.htm" class="btn btn-primary">Show all bills shipping</a>
+        <a href="${pageContext.request.contextPath}/checkbooking/showlistcompleted.htm" class="btn btn-primary">Show all bills Completed</a>
+        <a href="${pageContext.request.contextPath}/checkbooking/showlistcancel.htm" class="btn btn-primary">Show all bills Cancel</a>
         <h1>List Booking Shipping</h1>
-        <table border="1">
+        <table class="table table-striped">
             <tr>
-                <td>Caterer Name</td>
-                <td>Invoice Date</td>
-                <td>Delivery Date</td>
-                <td>Status</td>
-                <td colspan="4">Option</td>
+                <td><strong>Caterer Name</strong></td>
+                <td><strong>Invoice Date</strong></td>
+                <td><strong>Delivery Date</strong></td>
+                <td><strong>Status</strong></td>
+                <td colspan="4"><strong>Option</strong></td>
             </tr>
             <c:forEach items="${listbookingsshipping}" var="booking">
                 <tr>
@@ -32,8 +36,8 @@
                     <td>${booking.invoiceDate}</td>
                     <td>${booking.deliveryDate}</td>
                     <td>${booking.status}</td>
-                    <td><button onclick="showdetails(${booking.id});" >View Details</button></td>
-                <form><td><input type="submit" value="Completed" onclick="form.action = '${pageContext.request.contextPath}/checkbooking/completedshipping/${booking.id}.htm';"></td></form>
+                    <td><button onclick="showdetails(${booking.id});" class="btn btn-info">View Details</button></td>
+                <form><td><input type="submit" value="Completed" onclick="form.action = '${pageContext.request.contextPath}/checkbooking/completedshipping/${booking.id}.htm';" class="btn btn-primary"></td></form>
             </tr> 
         </c:forEach>
     </table>
@@ -56,6 +60,6 @@
             });
         }
     </script>
-
+    <%@include file="../include/footer.jsp" %>
 </body>
 </html>

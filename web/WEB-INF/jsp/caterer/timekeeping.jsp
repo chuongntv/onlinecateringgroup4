@@ -16,38 +16,53 @@
         <title>Time Keeping</title>
     </head>
     <body>
-        <h1>${toDay}</h1>
-        <input type="button" value="Create Worker" onclick="form.action = '${pageContext.request.contextPath}/manageworker/createworker.htm';">
-        <a href="${pageContext.request.contextPath}/manageworker/createworker.htm">Create Worker</a>
-        <h1>Create Worker</h1>
-        <h4>${messageCreate}</h4>
-        <form action="../createworker.htm" commandName="workerCreate" method="POST">  
-            Name: <input name="workerName" required/><br>
-            Email: <input name="workerEmail" type="email" required/><br>
-            Phone Number: <input name="workerPhoneNumber" required/><br>
-            Address: <input name="workerAddress" required/><br>
-            <input type="submit" value="Create">           
+        <%@include file="../include/header.jsp" %>
+        <h1>To Day: ${toDay}</h1><br><br>
+        <br><h1>Create Worker</h1><br><br>
+        <style>.table th, .table td { 
+                border-top: none !important; 
+            }
+        </style>
+        <form action="../createworker.htm" commandName="workerCreate" method="POST"> 
+            <table class="table">
+                <tr>
+                    <td width="13%"><strong>Name: </strong></td>
+                    <td ><strong><input name="workerName" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Email: </strong></td>
+                    <td ><strong><input name="workerEmail" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Phone Number: </strong></td>
+                    <td ><strong><input name="workerPhoneNumber" required/></strong></td>
+                </tr>
+                <tr>
+                    <td width="13%"><strong>Address: </strong></td>
+                    <td ><strong><input name="workerAddress" required/></strong></td>
+                </tr>
+            </table>  
+            <input type="submit" value="Create" class="btn btn-primary"> 
         </form> 
         <hr>
         <h1>List Workers By Worker Type</h1>
-        ${messagePaymentNoti}
-        <table border="" >
-            <tr class="info">               
-                <th>Checked</th>
-                <th>Worker Name</th>
-                <th>Worker Email</th>
-                <th colspan="2">Options</th>
+        <table class="table table-striped" >
+            <tr >               
+                <td><strong>Checked</strong></td>
+                <td><strong>Worker Name</strong></td>
+                <td><strong>Worker Email</strong></td>
+                <td colspan="3"><strong>Options</strong></td>
             </tr>
             <c:forEach items="${workers}" var="worker">
 
                 <tr>
                     <td id="td${worker.id}"><button onClick = "this.style.visibility = 'hidden';
-                            addDate(${worker.id});">Check To Day</button></td>
+                            addDate(${worker.id});"  class="btn btn-primary">Check To Day</button></td>
                     <td>${worker.workerName}</td>
                     <td>${worker.workerEmail}</td>  
-                    <td><a href="${pageContext.request.contextPath}/manageworker/editworker/${worker.id}.htm">Edit</a></td>
-                    <td><a  href="${pageContext.request.contextPath}/manageworker/blockworker/${worker.id}.htm" > Block</a></td>
-                    <td><a  href="${pageContext.request.contextPath}/manageworker/payment/${worker.id}.htm" > Payment</a></td>
+                    <td><a href="${pageContext.request.contextPath}/manageworker/editworker/${worker.id}.htm"  class="btn btn-primary">Edit</a></td>
+                    <td><a  href="${pageContext.request.contextPath}/manageworker/blockworker/${worker.id}.htm"  class="btn btn-danger"> Block</a></td>
+                    <td><a  href="${pageContext.request.contextPath}/manageworker/payment/${worker.id}.htm"  class="btn btn-primary"> Payment</a></td>
                 </tr>                 
 
             </c:forEach>
@@ -60,7 +75,7 @@
                     cache: false,
                     data: 'workerId=' + id,
                     success: function (data) {
-                        $('#td'+id).html(data);
+                        $('#td' + id).html(data);
 
                     },
                     error: function () {
@@ -70,5 +85,6 @@
             }
             ;
         </script>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

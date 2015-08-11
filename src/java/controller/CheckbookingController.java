@@ -81,21 +81,21 @@ public class CheckbookingController {
         List<SupplierChildInvoices> listChild = supplierChildInvoiceDAO.findSupplierChildInvoiceBySupplierInvoices(supplierInvoice);
         //String result = "<br>Next Random # is <b>" + r + "</b>. Generated on <b>" + new Date().toString() + "</b>";
         float totalPrice = 0;
-        String result = "<h1>Details</h1>" + "<table border='1' >"
+        String result = "<h1>Details</h1>" + "<table class=\"table table-striped\" >"
                 + "<tr>"
-                + "<th> Material Name </th>"
-                + "<th> Price/Unit</th>"
-                + "<th>Quantity</th>"
+                + "<td><strong> Material Name</strong> </td>"
+                + "<th><strong> Price/Unit</strong></th>"
+                + "<th><strong>Quantity</strong></th>"
                 + "</tr>" + "";
         for (SupplierChildInvoices item : listChild) {
             result += "<tr><td>" + item.getMaterialName() + "</td>"
-                    + "<td>" + item.getMaterialPricePerUnit() + "</td>"
+                    + "<td>$" + item.getMaterialPricePerUnit() + "</td>"
                     + "<td>" + item.getQuantity() + "</td>"
                     + "</tr>";
             totalPrice += item.getMaterialPricePerUnit() * item.getQuantity();
         }
-        result += "</table><br>";
-        result += "<strong>Total Price: " + totalPrice + "</strong>";
+        result += "</table>";
+        result += "<h3 style=\"color: blue\">Total Price:      $" + totalPrice + "</strong>";
         //result += "<input type=\"button\" value=\"Add to bill\" onclick='addToBill();'/>";
         //result += "<button onclick='showMaterials("+categoryId+");'>Add To Bill</button>";
         return result;

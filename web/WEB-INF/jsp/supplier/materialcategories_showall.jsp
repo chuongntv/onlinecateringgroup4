@@ -35,20 +35,19 @@
         </script>
     </head>
     <body onload="setCatererId();">
-        <strong>UserId: ${userId}</strong><br>
-        <a href="${pageContext.request.contextPath}/materialcategories/create.htm">Create category</a>
+        <%@include file="../include/header.jsp" %>
+        <a href="${pageContext.request.contextPath}/materialcategories/create.htm" class="btn btn-primary">Create category</a>
             <hr>
-            <h1>Create Material Category!</h1>
-        <h4>${messageCreate}</h4>
+            <h1>Create Material Category</h1><br>
         <form action="../create.htm" commandName="category" method="POST">  
             <input type="hidden" name="supplierId" value="${userId}"/>
             Category Name: <input name="categoryName"/>                                                     
-            <input type="submit" value="Create">           
+            <input type="submit" value="Create" class="btn btn-primary">           
         </form> 
         <hr>
         <h1>List of Material Categories</h1>
-        <table border="1" >
-            <tr class="info">               
+        <table class="table table-striped" >
+            <tr>               
                 <th>Category Name</th>
                 <th colspan="2">Options</th>
             </tr>
@@ -56,11 +55,12 @@
                 <tr>         
                     <td>${category.categoryName}</td>
                                         
-                    <td><a data-toggle="tooltip" title="Edit Catergory" href="${pageContext.request.contextPath}/materialcategories/edit/${category.id}.htm"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
-                    <td><a data-toggle="tooltip" title="Delete Catergory" href="${pageContext.request.contextPath}/materialcategories/delete/${category.id}.htm" > Delete</a></td>
-                    <td><a data-toggle="tooltip" href="${pageContext.request.contextPath}/materials/listmaterials/${category.id}.htm" > Create Material</a></td>
+                    <td><a data-toggle="tooltip" title="Edit Catergory" href="${pageContext.request.contextPath}/materialcategories/edit/${category.id}.htm" class="btn btn-primary">Edit</a></td>
+                    <td><a data-toggle="tooltip" title="Delete Catergory" href="${pageContext.request.contextPath}/materialcategories/delete/${category.id}.htm" class="btn btn-danger"> Delete</a></td>
+                    <td><a data-toggle="tooltip" href="${pageContext.request.contextPath}/materials/listmaterials/${category.id}.htm" class="btn btn-primary"> Create Material</a></td>
                 </tr> 
             </c:forEach>
         </table> 
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

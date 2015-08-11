@@ -14,19 +14,19 @@
         <title>Invoice</title>
     </head>
     <body>
-        <h1>Choose Delivery Date</h1>
+        <%@include file="../include/header.jsp" %>
+        <h1>Choose Delivery Date</h1><br>
         <spring:form action="../ordercaterer/listMyBill.htm" commandName="invoice" method="POST">
-            <input type="hidden" name="id" value="${invoice.id}"/>
-            ${invoice.invoiceDate}
-            Delivery Date: <input name="deliveryDate" type="date"/><br>
-            <input type="submit" value="Submit">
+            <input type="hidden" name="id" value="${invoice.id}"/><br>
+            <br><h3>Delivery Date:  <input name="deliveryDate" type="date"/></h3>
+            <input type="submit" value="Submit" class="btn btn-primary">
         </spring:form> 
-            <table border="1">
+            <table class="table table-striped">
             <tr>
-                <td>Material Name</td>
-                <td>Price/Unit</td>
-                <td>Quantity</td>
-                <td>Total Price</td>
+                <td><strong>Material Name</strong></td>
+                <td><strong>Price/Unit</strong></td>
+                <td><strong>Quantity</strong></td>
+                <td><strong>Total Price</strong></td>
             </tr>
             <c:forEach items="${childinvoices}" var="child">
                 <tr>
@@ -37,5 +37,6 @@
                 </tr> 
             </c:forEach>
         </table>
+            <%@include file="../include/footer.jsp" %>
     </body>
 </html>

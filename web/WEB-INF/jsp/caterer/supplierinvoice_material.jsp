@@ -16,6 +16,7 @@
         <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <style type="text/css" media="screen">
             #parent {
                 overflow: hidden;
@@ -39,11 +40,11 @@
             } 
         </style>
 
-        <h1>Order Materials</h1>
+        <h1>Order Materials</h1><br>
         <div id="parent">
             <div class="left">
                 <c:forEach items="${categories}" var="category">
-                    <button class="cate" id="${category.id}" style="background-color: antiquewhite" onclick="showMaterials(${category.id});">
+                    <button class="btn btn-primary" onclick="showMaterials(${category.id});">
                         ${category.categoryName}    
                     </button>   
                     <br>
@@ -57,12 +58,12 @@
         <div id="myBill">
         </div>
         <h1>List My Bill</h1>
-        <table border="1">
+        <table class="table table-striped">
             <tr>
-                <td>Supplier Name</td>
-                <td>Invoice Date</td>
-                <td>Delivery Date</td>
-                <td>Status</td>
+                <td><strong>Supplier Name</strong></td>
+                <td><strong>Invoice Date</strong></td>
+                <td><strong>Delivery Date</strong></td>
+                <td><strong>Status</strong></td>
             </tr>
             <c:forEach items="${listinvoices}" var="invoice">
                 <tr>
@@ -131,5 +132,6 @@
             }
             
         </script>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

@@ -22,7 +22,7 @@
                         }
                     },
                     error: function () {
-                        window.location.href = '${pageContext.request.contextPath}/account/login.htm';
+                        //window.location.href = '${pageContext.request.contextPath}/account/login.htm';
                     }
                 });
             }
@@ -33,7 +33,7 @@
     <body>
         <%@include file="include/header.jsp" %>
         
-        <a href="${pageContext.request.contextPath}/account/register.htm">Register</a><br><br>
+        <a href="${pageContext.request.contextPath}/account/register.htm" class="btn btn-info">Register</a><br><br>
         <a href="${pageContext.request.contextPath}/account/login.htm">Login</a><br><br>
         <strong>User ID: ${userId}</strong>
         <h3>Supplier</h3>
