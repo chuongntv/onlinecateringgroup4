@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Confirm Order</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      
         <script>
             /*  alert("hello");
              function checkdate() {
@@ -37,10 +37,11 @@
         <%@include file="../include/header.jsp" %>
         <div class="container">
 
+
             <spring:form action="confirm.htm" method="POST" commandName="customerinvoke" >
                 <input name="accounts.id" readonly="true" hidden="true" value="${customerinvoke.accounts.id}">
                 <div class="form-group">
-                    <div style="width: 400px;margin-left: auto;margin-right: auto" >
+                    <div style="width: 600px;margin-left: auto;margin-right: auto" >
                           <table>
                         <tr>
                             <td>Name:</td>
@@ -59,6 +60,9 @@
                             <td><input id="date" name="deliveryDate" type="date" required="true"   /><span  >${messagedate}</span></td>
                         </tr>
                     </table>
+
+           
+
 
                     <input type="submit" value="Order"  />
                     </div>

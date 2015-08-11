@@ -15,7 +15,7 @@
     </head>
     <body>
          <%@include file="../include/header.jsp" %>
-        <h3>Step2: Create supplier</h3>
+         <h3 style="text-align: center">Step2: Create supplier</h3>
         <span>${message}</span>
         <spring:form action="create_supplier.htm" commandName="supplier" role="form"  method="POST" >
             <input type="text" readonly="true" hidden="true" name="accounts.id" value="${supplier.accounts.id}" />

@@ -24,7 +24,7 @@
             Status: ${invoice.status} <br>            
         </div>
         <div>
-            <table style="width: 100%" border="2">
+            <table style="width: 100%" class="table table-striped" border="2">
                 <tr>
                     <td>Id</td>                    
                     <td>Food Name</td>

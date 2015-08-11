@@ -12,20 +12,28 @@
 
    
         <%@include file="../include/header.jsp" %>
-        <h1>Supplier List</h1>
-        <form action="search.htm" method="post">
+        <h1 style="text-align: center">Supplier List</h1><br>
+        <div>
+                <form action="search.htm" method="post">
             <input type="text" name="name" placeholder="Input name, phone, email"/>
             <button type="submit"  >Search</button>
         </form>
+        </div>
+    
 
-        <br>
+        
 
-        <table border="1" style="width: 100%">
+        <table border="1" style="width: 100%" class="table table-hover">
             <thead>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Phone</td>
+                <tr>
+                            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Country</th>
+            <th>Option</th>
+                </tr>
+    
         </thead>
         <c:forEach items="${suppliers}" var="supplier">
             <tbody>
@@ -47,8 +55,7 @@
                 ${supplier.countries.countryName}
             </td>
             
-            <td><a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/suppliers/edit/${supplier.id}.htm"> Edit</a></td>
-            <td><a data-toggle="tooltip" title="Detail" href="${pageContext.request.contextPath}/suppliers/detail/${supplier.id}.htm" onclick ="return confirm('Are you sure ?')" >Delete</a></td>
+            <td><a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/suppliers/edit/${supplier.id}.htm"> Edit</a> | <a data-toggle="tooltip" title="Detail" href="${pageContext.request.contextPath}/suppliers/detail/${supplier.id}.htm" onclick ="return confirm('Are you sure ?')" >Delete</a></td>
 
         </tbody>
     </c:forEach>

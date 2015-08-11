@@ -25,8 +25,8 @@
         <label>Phone number: ${user.phoneNumber}</label><br/>
         </div>
         <div>
-            <a  href="${pageContext.request.contextPath}/account/update.htm">Update Info</a>
-            <a  href="${pageContext.request.contextPath}/account/changepass.htm">Change Password</a>
+            <a  href="${pageContext.request.contextPath}/account/update.htm" class="btn btn-primary">Update Info</a>
+            <a  href="${pageContext.request.contextPath}/account/changepass.htm" class="btn btn-primary">Change Password</a>
         </div>
         <%@include file="../include/footer.jsp" %>
     </body>

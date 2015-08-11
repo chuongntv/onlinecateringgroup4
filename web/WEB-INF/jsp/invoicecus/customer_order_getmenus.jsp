@@ -15,6 +15,7 @@
     </head>
     <body>
         <%@include file="../include/header.jsp" %>
+
         
         <div>
             <h3 style="text-align: center">List menu</h3>
@@ -44,6 +45,9 @@
         </div>
         
        
+
+       
+
         <%@include file="../include/footer.jsp" %>
     </body>
 </html>

@@ -26,7 +26,11 @@
                     <option value="${country.id}">${country.countryName}</option>
                 </c:forEach>
             </select>
+
             <input class="btn btn-default btn-sm" type="submit" value="Next"/>
+
+          
+
         </form>
              </div>
          </div>

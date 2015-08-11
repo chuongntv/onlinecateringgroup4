@@ -18,7 +18,7 @@
         <spring:form action="login.htm" commandName="account" method="POST" class="form-horizontal" role="form">       
             Username: <spring:input path="username" required="required"/>
             Password: <spring:password path="password" required="required"/>
-            <button type="submit">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </spring:form>
         <%@include file="../include/footer.jsp" %>
     </body>

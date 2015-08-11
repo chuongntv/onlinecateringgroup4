@@ -15,46 +15,52 @@
     </head>
     <body>
         <%@include file="../include/header.jsp" %>
+
         <h3 style="text-align: center">Search menu</h3>
         <div>
-            <div style="width: 600px;margin-left: auto;margin-right: auto">
-                 <form method="post" action="getmenus.htm" >
-            
-            
-            <table>
-                <tr>
-                    <td>Categories:</td>
-                    <td>            <select name="cateid">
-                            <c:forEach items="${catetypes}" var="cate">
-                                <option value="${cate.id}">${cate.categoryTypeName}</option>
-                            </c:forEach>
-                        </select></td>
-                </tr>
-                <tr>
-                    <td>City:</td>
-                    <td>          <select name="cityid">
-                            <c:forEach items="${cities}" var="city">
-                                <option value="${city.id}"> ${city.cityName} </option>
-                            </c:forEach>
-                        </select></td>
-                </tr>
-                <tr>
-                    <td>Number of people:</td>
-                    <td><input type="number" name="numberofpeople" required="true"/></td>
-                </tr>
-
-            </table>
+            <div style="width: 700px;margin-left: auto;margin-right: auto">
+                <form method="post" action="getmenus.htm" >
 
 
+                    <table >
+
+                        <h3></h3>
+                        <form method="post" action="getmenus.htm" >
+                            <table class="table table-striped">
+
+                                <tr>
+                                    <td>Categories:</td>
+                                    <td>            <select name="cateid">
+                                            <c:forEach items="${catetypes}" var="cate">
+                                                <option value="${cate.id}">${cate.categoryTypeName}</option>
+                                            </c:forEach>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>City:</td>
+                                    <td>          <select name="cityid">
+                                            <c:forEach items="${cities}" var="city">
+                                                <option value="${city.id}"> ${city.cityName} </option>
+                                            </c:forEach>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>Number of people:</td>
+                                    <td><input type="number" name="numberofpeople" required="true"/></td>
+                                </tr>
+
+                            </table>
 
 
 
-            <input type="submit" value="Next"/>
-        </form>
-            </div>
-        </div>
-        
-       
-        <%@include file="../include/footer.jsp" %>
-    </body>
-</html>
+
+
+                            <input type="submit" value="Next" class="btn btn-primary"/>
+                        </form>
+                        </div>
+                        </div>
+
+
+                        <%@include file="../include/footer.jsp" %>
+                        </body>
+                        </html>

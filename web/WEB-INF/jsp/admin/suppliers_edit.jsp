@@ -20,6 +20,8 @@
 </head>
 <body>
 <%@include file="../include/header.jsp" %>
+
+
     <spring:form action="../edit.htm" method="POST" commandName="supplier" onSubmit="validate(); return false;" role="form" id="edit-form" >   
         <input type="hidden" name="id" value="${requestScope.id}"/> 
         <input type="text" hidden="true" name="accounts.id" value="${supplier.accounts.id}" />

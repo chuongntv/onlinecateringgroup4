@@ -27,7 +27,7 @@
             <c:if test="${userGroup=='caterer'}">
                 <spring:radiobutton path="status" value="complete" />Complete</c:if>
                 <br/>
-                <input type="submit" value="Save"/> 
+                <input type="submit" value="Save" class="btn btn-primary"/> 
                 <p></p>
                 <a href="${pageContext.request.contextPath}/customerInvoice/index.htm"> Back to List</a>
         </spring:form> 

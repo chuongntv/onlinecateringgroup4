@@ -16,7 +16,7 @@
     </head>
     <body>
          <%@include file="../include/header.jsp" %>
-        <h3>Step 1: create account</h3>
+         <h3 style="text-align: center">Step 1: create account</h3>
         <p>${message}</p>
         <spring:form action="create_account.htm" method="POST" commandName="account" role="form"  > 
             <table>

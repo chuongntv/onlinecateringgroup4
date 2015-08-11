@@ -30,7 +30,7 @@
             Email: <spring:input path="catererEmail" type="email" required="required"/><br/>            
             Address:<spring:input path="catererAddress" required="required"/><br/>            
             Phone Number:<spring:input path="catererPhoneNumber" type="number"/><br/>            
-            <button type="submit">Create</button>
+            <button type="submit" class="btn btn-primary">Create</button>
         </spring:form>
             <%@include file="../include/footer.jsp" %>
     </body>

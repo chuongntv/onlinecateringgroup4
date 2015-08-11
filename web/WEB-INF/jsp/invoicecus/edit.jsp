@@ -32,9 +32,9 @@
             <spring:radiobutton path="status" value="waiting" />Waiting 
             <spring:radiobutton path="status" value="complete" />Complete
             <br/>
-            <input type="submit" value="Save"/> 
+            <input type="submit" class="btn btn-primary" value="Save"/> 
             <p></p>
-            <a href="${pageContext.request.contextPath}/customerInvoice/index.htm"> Back to List</a>
+            <a href="${pageContext.request.contextPath}/customerInvoice/index.htm" > Back to List</a>
         </spring:form>      
         <script type="text/javascript">
             function demo(s) {
