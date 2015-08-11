@@ -48,13 +48,12 @@
         <h1>List of Material Categories</h1>
         <table class="table table-striped" >
             <tr>               
-                <th>Category Name</th>
-                <th colspan="2">Options</th>
+                <td><strong>Category Name</strong></td>
+                <td colspan="2"><strong>Options</strong></td>
             </tr>
             <c:forEach items="${categories}" var="category">
                 <tr>         
                     <td>${category.categoryName}</td>
-                                        
                     <td><a data-toggle="tooltip" title="Edit Catergory" href="${pageContext.request.contextPath}/materialcategories/edit/${category.id}.htm" class="btn btn-primary">Edit</a></td>
                     <td><a data-toggle="tooltip" title="Delete Catergory" href="${pageContext.request.contextPath}/materialcategories/delete/${category.id}.htm" class="btn btn-danger"> Delete</a></td>
                     <td><a data-toggle="tooltip" href="${pageContext.request.contextPath}/materials/listmaterials/${category.id}.htm" class="btn btn-primary"> Create Material</a></td>

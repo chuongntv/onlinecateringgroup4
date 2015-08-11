@@ -25,12 +25,11 @@
                 </tr>
                 <tr>
                     <td width="13%"><strong>Material Unit: </strong></td>
-                    <td width="13%"><strong>      <spring:input type="text" path="materialUnit"/></strong></td> 
+                    <td width="13%"><strong><spring:input type="text" path="materialUnit"/></strong></td> 
                 </tr>
                 <tr>
                     <td width="13%"><strong>Price per Unit: </strong></td>
-                    <td width="13%"><strong>  <spring:input type="number" path="materialPricePerUnit"/><br>   
-                        </strong></td> 
+                    <td width="13%"><strong>  <spring:input type="number" path="materialPricePerUnit"/><br></strong></td> 
                 </tr>
                 <input type="submit" value="Save" onclick="form.action = '${pageContext.request.contextPath}/materials/edit.htm';"  class="btn btn-primary">
                 <input type="submit" value="Cancel" onclick="form.action = '${pageContext.request.contextPath}/materials/cancel.htm';"  class="btn btn-warning"/>
