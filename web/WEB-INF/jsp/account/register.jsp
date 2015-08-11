@@ -16,7 +16,7 @@
         <script>
             $(function () {
                 $("#dateOfBirth").datepicker();
-            });             
+            });
         </script>
         <script type="text/javascript">
             function check() {
@@ -54,12 +54,14 @@
         </script>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Register!</h1>
         <h2>${message}</h2>
         <spring:form action="register.htm" commandName="account" method="POST" class="form-horizontal" role="form">       
             Username: <spring:input path="username" required="required"/><br/>
             Password: <spring:password path="password" required="required" id="pass1"/><br/>
-            Retype-password: <input type="password" id="pass2" name="pass2" required onkeyup="check();return false;"/><span id="confirmMessage" class="confirmMessage"></span><br/>
+            Retype-password: <input type="password" id="pass2" name="pass2" required onkeyup="check();
+                            return false;"/><span id="confirmMessage" class="confirmMessage"></span><br/>
             User Group: <spring:radiobutton path="userGroup" value="customer"/>Customer<br/>
             <spring:radiobutton path="userGroup" value="caterer"/>Caterer<br/>
             <spring:radiobutton path="userGroup" value="supplier"/>Supplier<br/>
@@ -72,5 +74,6 @@
             <input type="hidden" name="status" value="0"/>
             <button type="submit"> Create</button>
         </spring:form>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

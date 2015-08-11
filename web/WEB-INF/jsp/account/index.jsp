@@ -14,8 +14,9 @@
         <title>Account Management</title>
     </head>
     <body>
-        <h1>Account Management</h1>
-        <h2>Welcome ${user.username}</h2>
+        <%@include file="../include/header.jsp" %>
+        <h2>Account Management</h2>
+        <h3>Welcome ${user.username}</h3>
         Give me a id for userId: ${user.id}
         <a  href="${pageContext.request.contextPath}/account/update.htm"> Update</a>
         <table border="1">
@@ -47,7 +48,7 @@
                     <td><a data-toggle="tooltip" title="Edit" href="${pageContext.request.contextPath}/account/edit/${account.id}.htm"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
                 </tr> 
             </c:forEach>
-        </table>        
-            <a href="${pageContext.request.contextPath}/account/login.htm">Login</a><br>                
+        </table>                      
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

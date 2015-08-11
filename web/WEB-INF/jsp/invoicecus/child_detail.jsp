@@ -14,6 +14,7 @@
         <title>Supplier Child Invoice Detail</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h3>Customer Child Invoice</h3>
         <div>
             ID Invoice: ${invoice.id} <br>
@@ -40,5 +41,6 @@
                 </c:forEach>
             </table>
         </div>
+            <%@include file="../include/footer.jsp" %>
     </body>
 </html>

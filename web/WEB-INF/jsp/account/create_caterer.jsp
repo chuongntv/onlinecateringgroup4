@@ -17,7 +17,8 @@
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>        
     </head>
     <body>
-        <h1>Create caterer!</h1>
+        <%@include file="../include/header.jsp" %>
+        <h2>Create caterer!</h2>
         <spring:form action="create_caterer.htm" commandName="caterer" method="POST" class="form-horizontal" role="form">       
             <h3>Account Id: ${user.id}</h3><input type="hidden" name="accounts.id" value="${user.id}"/>
             City: <select name="cities.id">
@@ -31,5 +32,6 @@
             Phone Number:<spring:input path="catererPhoneNumber" type="number"/><br/>            
             <button type="submit">Create</button>
         </spring:form>
+            <%@include file="../include/footer.jsp" %>
     </body>
 </html>

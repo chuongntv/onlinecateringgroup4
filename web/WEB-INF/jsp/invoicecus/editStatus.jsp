@@ -17,6 +17,7 @@
         <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>        
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Edit status</h1>        
         <spring:form action="../editStatus.htm" commandName="invoice" method="POST" class="form-horizontal" role="form">       
             Customer Invoice ID: <input type="text" readonly name="id" value="${invoice.id}"/><br/>      
@@ -29,6 +30,7 @@
                 <input type="submit" value="Save"/> 
                 <p></p>
                 <a href="${pageContext.request.contextPath}/customerInvoice/index.htm"> Back to List</a>
-        </spring:form>              
+        </spring:form> 
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

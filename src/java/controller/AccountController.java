@@ -40,18 +40,23 @@ public class AccountController {
     AccountsDAO accDAO = new AccountsDAO();
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String edit(ModelMap modelMap) {
-        modelMap.put("account", new Accounts());
-        return "account/register";
+    public String edit(ModelMap modelMap, HttpSession sessions) {
+        Accounts acc = (Accounts) sessions.getAttribute("user");
+        if (acc != null) {
+            return "redirect:/index.htm";
+        } else {
+            modelMap.put("account", new Accounts());
+            return "account/register";
+        }
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String create(@ModelAttribute(value = "account") Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Register failed !");
-            return "account/register";
+            return "redirect:/account/register.htm";
         } else {
-            Accounts temp = new Accounts();
+            Accounts temp = new Accounts();            
             temp = accDAO.findByUsername(account.getUsername());
             if (temp != null) {
                 sessions.setAttribute("message", "Register failed! Username existed");
@@ -106,16 +111,22 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(ModelMap modelMap) {
-        modelMap.put("account", new Accounts());
-        return "account/login";
+    public String login(ModelMap modelMap, HttpSession sessions) {
+
+        Accounts acc = (Accounts) sessions.getAttribute("user");
+        if (acc != null) {
+            return "redirect:/index.htm";
+        } else {
+            modelMap.put("account", new Accounts());
+            return "account/login";
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@ModelAttribute(value = "account") Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
         if (bindingResult.hasErrors()) {
             modelMap.put("message", "login failed !");
-            return "account/login";
+            return "redirect:/account/login.htm";
         } else {
             Accounts temp = new Accounts();
             temp = accDAO.findAccounts(account.getUsername(), account.getPassword());
@@ -153,7 +164,7 @@ public class AccountController {
     public String forgot(@ModelAttribute(value = "account") Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Reset password failed! Wrong Information !");
-            return "account/login";
+            return "redirect:/account/forgot.htm";
         } else {
             String username = account.getUsername();
             String email = account.getEmail();
@@ -166,7 +177,7 @@ public class AccountController {
                 // sends the e-mail
                 mailSender.send(mail);
                 sessions.setAttribute("message", "Mail has been sent!");
-                return "redirect:../index";
+                return "redirect:/index.htm";
             } else {
                 sessions.setAttribute("message", "Username not found!");
                 return "account/forgot";
@@ -189,8 +200,12 @@ public class AccountController {
     public String update(@ModelAttribute(value = "account") @Valid Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Update failed !");
-            return "countries_edit";
+            return "redirect:/account/update.htm";
         } else {
+//            String dateInString = account.getDateOfBirth();
+//            String[] dateArr = dateInString.split("-");
+//            String dob = dateArr[1] + "/" + dateArr[2] + "/" + dateArr[0];
+//            account.setDateOfBirth(dob);
             accDAO.update(account);
             Accounts temp = (Accounts) sessions.getAttribute("user");
             Accounts newUser = accDAO.findByUsername(temp.getUsername());
@@ -214,8 +229,12 @@ public class AccountController {
     public String edit(@ModelAttribute(value = "account") @Valid Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Update failed !");
-            return "countries_edit";
+            return "account/edit";
         } else {
+//            String dateInString = account.getDateOfBirth();
+//            String[] dateArr = dateInString.split("-");
+//            String dob = dateArr[1] + "/" + dateArr[2] + "/" + dateArr[0];
+//            account.setDateOfBirth(dob);
             accDAO.edit(account);
             Accounts temp = (Accounts) sessions.getAttribute("user");
             Accounts newUser = accDAO.findByUsername(temp.getUsername());
@@ -239,7 +258,7 @@ public class AccountController {
     public String changepass(@ModelAttribute(value = "account") Accounts account, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) throws Exception {
         if (bindingResult.hasErrors()) {
             modelMap.put("message", "Changing Password failed !");
-            return "account/change_password";
+            return "redirect:/account/changepass.htm";
         } else {
             accDAO.changepass(account.getPassword(), account.getId());
             sessions.setAttribute("message", "Change pass success!");
@@ -269,7 +288,7 @@ public class AccountController {
     public String create_supplier(@ModelAttribute(value = "supplier") Suppliers supplier, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Create supplier failed !");
-            return "redirect:account/create_supplier";
+            return "redirect:/account/create_supplier.htm";
         } else {
             accDAO.addSupplier(supplier);
             sessions.setAttribute("user", accDAO.findById(supplier.getAccounts().getId()));
@@ -292,13 +311,24 @@ public class AccountController {
     public String create_caterer(@ModelAttribute(value = "caterer") Caterers caterer, ModelMap modelMap, BindingResult bindingResult, HttpSession sessions) {
         if (bindingResult.hasErrors()) {
             sessions.setAttribute("message", "Create caterer failed !");
-            return "redirect:account/create_caterer";
+            return "redirect:/account/create_caterer.htm";
         } else {
             accDAO.addCaterer(caterer);
             sessions.setAttribute("listcities", null);
             sessions.setAttribute("user", accDAO.findById(caterer.getAccounts().getId()));
             sessions.setAttribute("message", "Create caterer completed!");
             return "redirect:/index.htm";
+        }
+    }
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String info(ModelMap modelMap, HttpSession sessions) {
+        Accounts acc = (Accounts) sessions.getAttribute("user");
+        if (acc != null) {
+            modelMap.put("title", "Account info");
+            return "account/info";
+        } else {
+            return "redirect:/account/login.htm";
         }
     }
 }

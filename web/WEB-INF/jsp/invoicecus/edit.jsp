@@ -17,6 +17,7 @@
         <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>        
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Set Worker</h1>        
         <spring:form action="../edit.htm" commandName="invoice" method="POST" class="form-horizontal" role="form">       
             <input type="hidden" name="id" value="${invoice.id}"/>
@@ -54,5 +55,6 @@
                 });
             }
         </script>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

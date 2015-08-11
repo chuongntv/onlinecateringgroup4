@@ -12,15 +12,11 @@
         <title>Update Info</title>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>        
-        <script>
-            $(function () {
-                $("#dateOfBirth").datepicker();
-            });
-        </script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>                
     </head>
     <body>
-        <h1>Update Account Information!</h1>
+        <%@include file="../include/header.jsp" %>
+        <h2>Update Account Information!</h2>
         <spring:form action="update.htm" commandName="account" method="POST" class="form-horizontal" role="form">
             <input type="hidden" name="id" value="${account.id}"/>
             <input type="hidden" name="username" value="${account.username}"/>
@@ -33,5 +29,7 @@
             Phone Number:<spring:input path="phoneNumber" type="number"/><br/>            
             <button type="submit"> Update</button>
         </spring:form>
-    </body>
+        <a  href="${pageContext.request.contextPath}/account/info.htm">Back to info</a>
+        <%@include file="../include/footer.jsp" %>        
+    </body>    
 </html>

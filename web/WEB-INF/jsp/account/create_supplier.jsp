@@ -19,7 +19,8 @@
 
     </head>
     <body>
-        <h1>Supplier information!</h1>
+        <%@include file="../include/header.jsp" %>
+        <h2>Supplier information!</h2>
         <spring:form action="create_supplier.htm" commandName="supplier" method="POST" class="form-horizontal" role="form">       
             <h3>Account Id: ${user.id}</h3><input type="hidden" name="accounts.id" value="${user.id}"/>
             Country:<select name="countries.id">
@@ -34,6 +35,7 @@
             Phone Number:<spring:input path="supplierPhoneNumber" type="number"/><br/>            
             <button type="submit"> Create</button>
         </spring:form>
+        <%@include file="../include/footer.jsp" %>
     </body>
 
 

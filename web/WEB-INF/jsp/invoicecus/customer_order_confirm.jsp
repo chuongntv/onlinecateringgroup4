@@ -15,20 +15,20 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>
             /*  alert("hello");
-            function checkdate() {
-                alert("Checkday ing...");
-                var datenow = new Date();
-                var i = Date.parse(datenow);
-                var minutes = 1000 * 60;
-                var hours = minutes * 60;
-                var days = hours * 24;
-                var years = days * 365;
-               // var d = Math.round(i / days);
-                alert(i/years);
-                datecheck   =  document.getElementById("date");
-                
-            }
-*/
+             function checkdate() {
+             alert("Checkday ing...");
+             var datenow = new Date();
+             var i = Date.parse(datenow);
+             var minutes = 1000 * 60;
+             var hours = minutes * 60;
+             var days = hours * 24;
+             var years = days * 365;
+             // var d = Math.round(i / days);
+             alert(i/years);
+             datecheck   =  document.getElementById("date");
+             
+             }
+             */
         </script>
 
     </head>
@@ -41,11 +41,11 @@
                     <td>Name:</td>
                     <td><input name="deliveryName" required="true"  id="name" type="text"/></td>
                 </tr>
-                                <tr>
+                <tr>
                     <td>Phone:</td>
                     <td><input name="deliveryPhoneNumber" required="true"  type="text"/></td>
                 </tr>
-                                <tr>
+                <tr>
                     <td>Address:</td>
                     <td><input name="deliveryAddress" required="true" type="text"/></td>
                 </tr>
@@ -59,7 +59,7 @@
 
         </spring:form>
 
-   <%@include file="../include/footer.jsp" %>
+            <%@include file="../include/footer.jsp" %>
     </body>
 
 </html>

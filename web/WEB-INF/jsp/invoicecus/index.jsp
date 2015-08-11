@@ -16,6 +16,7 @@
         <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <h1>Account Management</h1>
         <h2>Welcome ${user.username}</h2>                
         <table border="1">
@@ -63,5 +64,6 @@
                 </tr> 
             </c:forEach>
         </table>           
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

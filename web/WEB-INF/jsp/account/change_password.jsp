@@ -50,13 +50,17 @@
         </script>
     </head>
     <body>
-        <h1>Change Password!</h1>
+        <%@include file="../include/header.jsp" %>
+        <h2>Change Password!</h2>
         <spring:form action="changepass.htm" commandName="account" method="POST" class="form-horizontal" role="form">       
             <input type="hidden" name="id" value="${user.id}"/>
             Username: <spring:input disabled="true" readonly="true" path="username" required="required" maxlength="12"/><br/>
             Password: <spring:password id="pass1" path="password" required="required" /><br/>
-            Retype-password: <input id="pass2" type="password" name="pass2" required onkeyup="check();return false;"/><span id="confirmMessage" class="confirmMessage"></span><br/>
+            Retype-password: <input id="pass2" type="password" name="pass2" required onkeyup="check();
+                            return false;"/><span id="confirmMessage" class="confirmMessage"></span><br/>
             <input type="submit" value="Save"/> 
         </spring:form>
+        <a  href="${pageContext.request.contextPath}/account/info.htm">Back to info</a>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

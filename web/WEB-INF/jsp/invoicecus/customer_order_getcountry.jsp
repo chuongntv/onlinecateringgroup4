@@ -11,10 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Choose country</title>
+        <title>JSP Page</title>
     </head>
     <body>
-         <%@include file="../include/header.jsp" %>
+        <%@include file="../include/header.jsp" %>
         <h3>Choose your country</h3>
         <form action="getchoice.htm" method="post" >
             <select name="countryid">
@@ -24,6 +24,6 @@
             </select>
             <input type="submit" value="Next"/>
         </form>
-         <%@include file="../include/footer.jsp" %>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

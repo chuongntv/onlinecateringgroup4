@@ -49,6 +49,6 @@
             </c:forEach> 
             <input type="submit" value="Next"/>
         </form>
-         <%@include file="../include/footer.jsp" %>
+        <%@include file="../include/footer.jsps" %>
     </body>
 </html>

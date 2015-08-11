@@ -15,14 +15,11 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>        
-        <script>
-            $(function () {
-                $("#dateOfBirth").datepicker();
-            });
-        </script>
+        
     </head>
     <body>
-        <h1>Edit Account!</h1>
+        <%@include file="../include/header.jsp" %>
+        <h2>Edit Account!</h2>
         <spring:form action="../edit.htm" commandName="account" method="POST" class="form-horizontal" role="form">
             <input type="hidden" name="id" value="${account.id}"/>
             <input type="hidden" name="username" value="${account.username}"/>
@@ -41,5 +38,12 @@
             <spring:radiobutton path="status" value="1"/>Inactive
             <button type="submit"> Save</button>
         </spring:form>
+        <a  href="${pageContext.request.contextPath}/account/index.htm">Back to list</a>
+        <%@include file="../include/footer.jsp" %>
+        <script>
+            $(function () {
+                $("#dateOfBirth").datepicker();
+            });
+        </script>
     </body>
 </html>

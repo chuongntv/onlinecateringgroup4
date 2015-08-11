@@ -12,13 +12,14 @@
         <title>Login Page</title>
     </head>
     <body>
-
-        <h1>Login</h1>
-        <h2>${message}</h2>
+        <%@include file="../include/header.jsp" %>
+        <h2>Login</h2>
+        <h3>${message}</h3>
         <spring:form action="login.htm" commandName="account" method="POST" class="form-horizontal" role="form">       
             Username: <spring:input path="username" required="required"/>
             Password: <spring:password path="password" required="required"/>
             <button type="submit">Login</button>
         </spring:form>
+        <%@include file="../include/footer.jsp" %>
     </body>
 </html>
