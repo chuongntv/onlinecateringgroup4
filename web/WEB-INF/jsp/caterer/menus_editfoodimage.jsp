@@ -15,14 +15,21 @@
     </head>
     <body>
         <%@include file="../include/header.jsp" %>
-        <H2>Edit image ${food.foodName}</H2>
-        <spring:form action="../editfoodimage.htm" commandName="food" method="post" enctype="multipart/form-data" >
+        
+        <div>
+            <h3 style="text-align: center">Edit image ${food.foodName}</h3>
+            <div style="width: 600px;margin-left: auto;margin-right: auto">
+                <spring:form action="../editfoodimage.htm" commandName="food" method="post" enctype="multipart/form-data" >
             <input type="text" name="id" value="${food.id}" hidden="true"/>
 
             <img src="${pageContext.request.contextPath}${food.image}" width="100px" height="150px"/><br>
             <input name="file" cssClass="form-control" type="file" /><br>
             <input type="submit" value="Edit"/>
         </spring:form>
+            </div>
+        </div>
+        
+        
                <%@include file="../include/footer.jsp" %>
     </body>
 </html>

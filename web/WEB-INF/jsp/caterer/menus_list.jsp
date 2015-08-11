@@ -11,20 +11,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <title>List Menu</title>
     </head>
     <body>
          <%@include file="../include/header.jsp" %>
-        <table style="width: 100%">
-            <tr>
-                <td>Name</td>
-                <td>Categories</td>
-                <td>Cost per plate</td>
-                <td>Min plate</td>
-                <td>Max plate</td>
-                <td>Image</td>
-                <td>Option</td>
-            </tr>
+        <table style="width: 100%" class="table table-hover">
+            <thead>
+                <tr>
+                                  <th>Name</th>
+                <th>Categories</th>
+                <th>Cost per plate</th>
+                <th>Min plate</th>
+                <th>Max plate</th>
+                <th>Image</th>
+                <th>Option</th>
+                </tr>
+  
+        </thead>
             <c:forEach items="${listmenu}" var="menu">
                 <tr>
 

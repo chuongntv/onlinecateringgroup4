@@ -12,19 +12,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Choose food</title>
+          <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>
     <body>
         <%@include file="../include/header.jsp" %>
-        <h3>choose your foods</h3>
-        <span>${message}</span>
+        <h3 style="text-align: center">Choose your foods</h3>
+        <div >
+            <div style="width: 600px;margin-left: auto; margin-right: auto">
+                  <span>${message}</span>
         <form action="../choosefoods.htm" method="post">
 
 
             <c:forEach items="${listsubmenus}" var="submenu">
                 <div>
 
-                    <h4>${submenu.id} ${submenu.subMenuName}</h4>
+                    <h5 style="color: #404040; font-size: medium"> ${submenu.subMenuName}</h5>
                     <c:forEach items="${listfoods}" var="food">
 
                         <c:choose>
@@ -33,10 +36,10 @@
 
                                     <c:choose>
                                         <c:when test="${food.isRequire==1}">
-                                            <input name="foods" type="checkbox" value="${food.foodName}" checked="true" required="true">    ${food.foodName} (This food is required)   
+                                           <img src="${pageContext.request.contextPath}${food.image}" width="50px" height="70px" /> <input name="foods" type="checkbox" value="${food.foodName}" checked="true" required="true">    ${food.foodName} (This food is required)   
                                         </c:when>
                                         <c:otherwise>
-                                            <input name="foods" type="checkbox" value="${food.foodName}"  >   ${food.foodName}   
+                                           <img src="${pageContext.request.contextPath}${food.image}" width="50px" height="70px" /> <input name="foods" type="checkbox" value="${food.foodName}"  >   ${food.foodName}   
                                         </c:otherwise>
                                     </c:choose>
                                             
@@ -49,6 +52,11 @@
             </c:forEach> 
             <input type="submit" value="Next"/>
         </form>
-        <%@include file="../include/footer.jsps" %>
+            </div>
+        </div>
+            
+        
+      
+         <%@include file="../include/footer.jsp" %>
     </body>
 </html>

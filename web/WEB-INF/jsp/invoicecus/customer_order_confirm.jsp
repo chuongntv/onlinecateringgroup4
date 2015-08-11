@@ -11,8 +11,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Confirm Order</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script>
             /*  alert("hello");
              function checkdate() {
@@ -34,32 +35,44 @@
     </head>
     <body>
         <%@include file="../include/header.jsp" %>
-        <spring:form action="confirm.htm" method="POST" commandName="customerinvoke" >
-            <input name="accounts.id" readonly="true" hidden="true" value="${customerinvoke.accounts.id}">
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td><input name="deliveryName" required="true"  id="name" type="text"/></td>
-                </tr>
-                <tr>
-                    <td>Phone:</td>
-                    <td><input name="deliveryPhoneNumber" required="true"  type="text"/></td>
-                </tr>
-                <tr>
-                    <td>Address:</td>
-                    <td><input name="deliveryAddress" required="true" type="text"/></td>
-                </tr>
-                <tr>
-                    <td>Delivery Date:</td>
-                    <td><input id="date" name="deliveryDate" type="date" required="true"   /><span  >${messagedate}</span></td>
-                </tr>
-            </table>
+        <div class="container">
 
-            <input type="submit" value="Order"  />
+            <spring:form action="confirm.htm" method="POST" commandName="customerinvoke" >
+                <input name="accounts.id" readonly="true" hidden="true" value="${customerinvoke.accounts.id}">
+                <div class="form-group">
+                    <div style="width: 400px;margin-left: auto;margin-right: auto" >
+                          <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td><input name="deliveryName" required="true"  id="name" type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td><input name="deliveryPhoneNumber" required="true"  type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td><input name="deliveryAddress" required="true" type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Delivery Date:</td>
+                            <td><input id="date" name="deliveryDate" type="date" required="true"   /><span  >${messagedate}</span></td>
+                        </tr>
+                    </table>
 
-        </spring:form>
+                    <input type="submit" value="Order"  />
+                    </div>
+                  
+                </div>
 
-            <%@include file="../include/footer.jsp" %>
+
+
+            </spring:form>
+
+        </div>
+
+
+        <%@include file="../include/footer.jsp" %>
     </body>
 
 </html>

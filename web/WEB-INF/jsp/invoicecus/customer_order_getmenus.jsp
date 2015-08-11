@@ -11,38 +11,39 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Choose menu</title>
     </head>
     <body>
         <%@include file="../include/header.jsp" %>
-        <h3>List menu</h3>
-        <table>
-            <tr>
-                <td>
-                    Menu Name
-                </td>
-                <td>
-                    Cost
-                </td>
-                <td>
-                    Caterer Name
-                </td>
-            </tr>
-            <c:forEach items="${listmenu}" var="menu">
-            <tr>
-               
-                <td>
-                    <a href="${pageContext.request.contextPath}/order/choosefoods/${menu.id}.htm">${menu.menuName}</a>
-                </td>
-                <td>
-                    ${menu.costPerPlate} $/Plate
-                </td>
-                <td>
-                    ${menu.caterers.catererName}
-                </td>
-            </tr>
-            </c:forEach>
-        </table>
+        
+        <div>
+            <h3 style="text-align: center">List menu</h3>
+            <div style="margin-left: auto;margin-right: auto">
+                 <c:forEach items="${listmenu}" var="menu">
+
+                     <div style="margin: 50px">
+                <table >
+                    <tr>
+                        <td><div>
+
+                                <a href="${pageContext.request.contextPath}/order/choosefoods/${menu.id}.htm"> <img src="${pageContext.request.contextPath}${menu.image}" width="70" height="100"/></a>
+                            </div></td>
+                            <td><div style="margin-left: 20px">
+                                <h4><a href="${pageContext.request.contextPath}/order/choosefoods/${menu.id}.htm">${menu.menuName}</a></h4>
+                                Cost per plate: ${menu.costPerPlate} $/Plate <br>
+                                Caterer Name: ${menu.caterers.catererName}
+                            </div></td>
+                    </tr>
+                </table>
+            </div>
+
+        </c:forEach>
+
+            </div>
+            
+        </div>
+        
+       
         <%@include file="../include/footer.jsp" %>
     </body>
 </html>

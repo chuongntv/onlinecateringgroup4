@@ -11,19 +11,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <title>Edit menu</title>
     </head>
     <body>
          <%@include file="../include/header.jsp" %>
-        <h3>Edit menu ${menu.menuName}</h3>
-          <spring:form action="../editmenu.htm" commandName="menu" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
+         
+         <div>
+             <h3 style="text-align: center">Edit menu ${menu.menuName}</h3>
+             <div style="width: 300px;margin-left: auto;margin-right: auto">
+                 <spring:form action="../editmenu.htm" commandName="menu" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
             <table>
                 <tr>
                     <td>
                         Menu Name:
                     </td>
                     <td>
-                        <input type="text" name="menuName" value="${menu.menuName}" required="true"/>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="menuName" value="${menu.menuName}" required="true"/>
+                        </div>
+                        
                     </td>
                 </tr>
                 <tr>
@@ -85,6 +92,10 @@
             </table>
 
         </spring:form>
+             </div>
+         </div>
+         
+          
        <%@include file="../include/footer.jsp" %>
     </body>
 </html>

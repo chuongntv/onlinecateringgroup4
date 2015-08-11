@@ -11,12 +11,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Search Menu</title>
     </head>
     <body>
         <%@include file="../include/header.jsp" %>
-        <h3></h3>
-        <form method="post" action="getmenus.htm" >
+        <h3 style="text-align: center">Search menu</h3>
+        <div>
+            <div style="width: 600px;margin-left: auto;margin-right: auto">
+                 <form method="post" action="getmenus.htm" >
+            
+            
             <table>
                 <tr>
                     <td>Categories:</td>
@@ -36,7 +40,7 @@
                 </tr>
                 <tr>
                     <td>Number of people:</td>
-                    <td><input type="number" name="numberofpeople"/></td>
+                    <td><input type="number" name="numberofpeople" required="true"/></td>
                 </tr>
 
             </table>
@@ -47,6 +51,10 @@
 
             <input type="submit" value="Next"/>
         </form>
+            </div>
+        </div>
+        
+       
         <%@include file="../include/footer.jsp" %>
     </body>
 </html>

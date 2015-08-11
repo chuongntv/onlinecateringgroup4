@@ -11,19 +11,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <title>Choose country</title>
     </head>
     <body>
-        <%@include file="../include/header.jsp" %>
-        <h3>Choose your country</h3>
-        <form action="getchoice.htm" method="post" >
+         <%@include file="../include/header.jsp" %>
+         
+         <div>
+             <h3 style="text-align: center">Choose your country</h3>
+             <div style="width: 200px;margin-left: auto;margin-right: auto">
+                 <form action="getchoice.htm" method="post"  >
             <select name="countryid">
                 <c:forEach items="${countries}" var="country">
                     <option value="${country.id}">${country.countryName}</option>
                 </c:forEach>
             </select>
-            <input type="submit" value="Next"/>
+            <input class="btn btn-default btn-sm" type="submit" value="Next"/>
         </form>
-        <%@include file="../include/footer.jsp" %>
+             </div>
+         </div>
+         
+        
+         <%@include file="../include/footer.jsp" %>
     </body>
 </html>
