@@ -14,6 +14,7 @@
         <title>Edit food image</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <H2>Edit image ${food.foodName}</H2>
         <spring:form action="../editfoodimage.htm" commandName="food" method="post" enctype="multipart/form-data" >
             <input type="text" name="id" value="${food.id}" hidden="true"/>
@@ -22,5 +23,6 @@
             <input name="file" cssClass="form-control" type="file" /><br>
             <input type="submit" value="Edit"/>
         </spring:form>
+               <%@include file="../include/footer.jsp" %>
     </body>
 </html>

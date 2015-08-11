@@ -14,6 +14,7 @@
         <title>Menu ${menu.menuName} detail</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <span>${message}</span>
         <c:forEach items="${listsubmenus}" var="submenu">
             <div>
@@ -51,6 +52,6 @@
         
          <a href="${pageContext.request.contextPath}/menus/createsubmenu.htm">Create SubMenu</a> 
          <a href="${pageContext.request.contextPath}/menus/listmenus.htm">Back to list menu</a> 
-         
+          <%@include file="../include/footer.jsp" %>
     </body>
 </html>

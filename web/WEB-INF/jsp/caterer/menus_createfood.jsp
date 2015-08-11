@@ -15,6 +15,7 @@
     </head>
     <body>
         
+ <%@include file="../include/header.jsp" %>
         <table>
             <spring:form action="../createfood.htm" method="POST" commandName="food">
                 <tr>
@@ -43,5 +44,6 @@
                 </tr>
             </spring:form>
         </table>
+          <%@include file="../include/footer.jsp" %>
     </body>
 </html>

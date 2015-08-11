@@ -14,6 +14,7 @@
         <title>Edit food</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
          <table>
             <spring:form action="../editfood.htm" method="POST" commandName="food">
                 <tr>
@@ -59,5 +60,6 @@
                 </tr>
             </spring:form>
         </table>
+            <%@include file="../include/footer.jsp" %>
     </body>
 </html>

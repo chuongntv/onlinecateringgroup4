@@ -14,6 +14,7 @@
         <title>Create Sub menu</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <spring:form action="../editsubmenu.htm" method="POST" commandName="submenu">
             <input name="id" value="${submenu.id}" >
             <table>
@@ -30,5 +31,6 @@
                 </tr>
             </table>
         </spring:form>
+               <%@include file="../include/footer.jsp" %>
     </body>
 </html>

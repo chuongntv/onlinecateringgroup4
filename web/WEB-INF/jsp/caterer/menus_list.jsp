@@ -14,6 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <table style="width: 100%">
             <tr>
                 <td>Name</td>
@@ -44,5 +45,6 @@
             </c:forEach>
         </table>
         <a href="${pageContext.request.contextPath}/menus/create.htm">Create menu</a>
+          <%@include file="../include/footer.jsp" %>
     </body>
 </html>

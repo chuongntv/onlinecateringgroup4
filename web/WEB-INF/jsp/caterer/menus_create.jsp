@@ -14,6 +14,7 @@
         <title>Create Menu</title>
     </head>
     <body>
+        <%@include file="../include/header.jsp" %>
         <spring:form action="create.htm" commandName="menu" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
             <table>
                 <tr>
@@ -77,7 +78,7 @@
 
 
 
-
+   <%@include file="../include/footer.jsp" %>
 
         </spring:form>
     </body>

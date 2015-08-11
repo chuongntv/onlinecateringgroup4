@@ -14,6 +14,7 @@
         <title>Edit menu</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <h3>Edit menu ${menu.menuName}</h3>
           <spring:form action="../editmenu.htm" commandName="menu" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
             <table>
@@ -84,5 +85,6 @@
             </table>
 
         </spring:form>
+       <%@include file="../include/footer.jsp" %>
     </body>
 </html>

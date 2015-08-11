@@ -14,6 +14,7 @@
         <title>Result</title>
     </head>
     <body>
+         <%@include file="../include/header.jsp" %>
         <h3>An error to delete</h3>
         <p>You can't delete sub menu "${submenu.subMenuName}" because have ${number} foods in this sub menu. Please delete them first</p>
         <div>
@@ -23,5 +24,6 @@
             </c:forEach>
         </div>
         <a href="${pageContext.request.contextPath}/menus/menudetail/${sessionScope.menuid}.htm">Back to menu detail</a>
+     <%@include file="../include/footer.jsp" %>
     </body>
 </html>
