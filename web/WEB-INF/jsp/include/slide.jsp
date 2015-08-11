@@ -9,10 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
     </head>
-    
         <header>
             <div class="row-top">
                 <div class="main">
@@ -63,4 +60,4 @@
                 });
             });
         </script>
-</html>
+ <%@include file="footer.jsp" %>

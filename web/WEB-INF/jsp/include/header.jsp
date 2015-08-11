@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
 <!--        <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" type="text/css" media="screen">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css" type="text/css" media="screen">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mybutton.css" type="text/css" media="screen">
